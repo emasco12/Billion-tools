@@ -9,7 +9,9 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
-
+app.use("/api/market", marketRoutes);
+app.use("/api/ai", aiRoutes);
+app.use("/api/news", newsRoutes);
 const random = (min, max) => +(Math.random() * (max - min) + min).toFixed(4);
 
 app.get("/", (req, res) => {
