@@ -1,0 +1,21 @@
+export default function AIPanel({ ai }) {
+
+  return (
+    <div className="panel">
+
+      <h2>AI Trading Assistant</h2>
+
+      <h3>{ai?.recommendation || "WAIT"}</h3>
+
+      <p>{ai?.comment || "Waiting for analysis..."}</p>
+
+      <br />
+
+      <strong>
+        Confidence: {ai?.confidence || "--"}
+      </strong>
+
+    </div>
+  );
+
+}
