@@ -3,137 +3,77 @@ const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
 
-const PORT = process.env.PORT || 3000;
+const random = (min, max) => +(Math.random() * (max - min) + min).toFixed(4);
 
-// Application information
-const APP = {
-  name: "ODERINDE GOLD INTELLIGENCE",
-  version: "3.0.0",
-  status: "ONLINE"
-};
-
-// Home
 app.get("/", (req, res) => {
   res.json({
-    ...APP,
-    message: "Professional AI Trading Platform"
+    app: "ODERINDE GOLD INTELLIGENCE",
+    version: "3.1.0",
+    status: "ONLINE"
   });
 });
 
-// Health
-app.get("/api/health", (req, res) => {
-  res.json({
-    success: true,
-    uptime: process.uptime(),
-    timestamp: new Date().toISOString()
-  });
-});
-
-// Dashboard Status
 app.get("/api/status", (req, res) => {
   res.json({
     backend: "ONLINE",
     ai: "READY",
-    smc: "READY",
-    strategyEngine: "READY",
+    market: "LIVE",
     websocket: "COMING SOON",
-    broker: "COMING SOON"
+    timestamp: new Date().toISOString()
   });
 });
 
-// Market Data
 app.get("/api/market", (req, res) => {
-
   res.json({
-
     forex: [
-      { symbol: "EUR/USD", price: 1.1732, change: 0.21 },
-      { symbol: "GBP/USD", price: 1.3625, change: -0.08 },
-      { symbol: "USD/JPY", price: 147.83, change: 0.14 },
-      { symbol: "AUD/USD", price: 0.6844, change: 0.09 }
+      { symbol: "EUR/USD", price: random(1.1700, 1.1800), change: random(-1, 1) },
+      { symbol: "GBP/USD", price: random(1.3500, 1.3700), change: random(-1, 1) },
+      { symbol: "USD/JPY", price: random(147, 149), change: random(-1, 1) }
     ],
-
     crypto: [
-      { symbol: "BTC/USD", price: 118250.45, change: 1.42 },
-      { symbol: "ETH/USD", price: 4821.60, change: 0.86 },
-      { symbol: "SOL/USD", price: 232.11, change: 2.35 }
+      { symbol: "BTC/USD", price: random(118000, 119000), change: random(-3, 3) },
+      { symbol: "ETH/USD", price: random(4700, 4900), change: random(-3, 3) }
     ],
-
     commodities: [
-      { symbol: "GOLD", price: 3528.40, change: 0.15 },
-      { symbol: "SILVER", price: 42.63, change: -0.12 },
-      { symbol: "WTI OIL", price: 78.92, change: 0.61 }
+      { symbol: "GOLD", price: random(3500, 3550), change: random(-1, 1) },
+      { symbol: "SILVER", price: random(42, 44), change: random(-1, 1) }
     ],
-
     indices: [
-      { symbol: "US30", price: 46230 },
-      { symbol: "NASDAQ", price: 24180 },
-      { symbol: "S&P500", price: 7245 }
+      { symbol: "US30", price: Math.round(random(46000, 46500)) }
     ]
-
   });
-
 });
 
-// AI
 app.get("/api/ai", (req, res) => {
+  const signals = ["BUY", "SELL", "WAIT"];
 
   res.json({
-
-    trend: "Bullish",
-
-    confidence: "91%",
-
-    recommendation: "BUY",
-
+    recommendation: signals[Math.floor(Math.random() * signals.length)],
+    confidence: Math.round(random(70, 98)) + "%",
     comment:
-      "Higher timeframe remains bullish. Wait for liquidity sweep before entry."
-
+      "Trend remains intact. Wait for confirmation before entering a position."
   });
-
 });
 
-// Signals
-app.get("/api/signals", (req, res) => {
-
-  res.json({
-
-    pair: "EUR/USD",
-
-    timeframe: "H1",
-
-    signal: "BUY",
-
-    entry: 1.1730,
-
-    stopLoss: 1.1705,
-
-    takeProfit: 1.1795,
-
-    riskReward: "1 : 3"
-
-  });
-
+app.get("/api/news", (req, res) => {
+  res.json([
+    {
+      title: "USD strengthens ahead of major economic releases"
+    },
+    {
+      title: "Gold remains supported by global uncertainty"
+    },
+    {
+      title: "Bitcoin trades near recent highs"
+    }
+  ]);
 });
 
 app.listen(PORT, () => {
-
-  console.log("");
-
-  console.log("====================================");
-
-  console.log(APP.name);
-
-  console.log("Version:", APP.version);
-
-  console.log("Server Running");
-
-  console.log("Port:", PORT);
-
-  console.log("====================================");
-
+  console.log(`🚀 ODERINDE GOLD INTELLIGENCE running on port ${PORT}`);
 });
