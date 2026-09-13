@@ -1,0 +1,19 @@
+{
+  "name": "oderinde-gold-intelligence",
+  "version": "3.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend",
+    "shared"
+  ],
+  "scripts": {
+    "install-all": "npm install --workspaces",
+    "dev": "npm run dev --workspace=backend",
+    "build": "npm run build --workspaces",
+    "start": "npm run start --workspace=backend"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
