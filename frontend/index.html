@@ -1,63 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ODERINDE GOLD INTELLIGENCE v3.0</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ODERINDE GOLD INTELLIGENCE</title>
 
-  <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family:Arial,Helvetica,sans-serif;
-    }
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
+body{background:#0b1220;color:#fff;}
+header{
+background:#111827;
+padding:18px;
+font-size:24px;
+font-weight:bold;
+text-align:center;
+border-bottom:2px solid #00c853;
+}
 
-    body{
-      background:#0b1220;
-      color:white;
-    }
+.container{
+padding:20px;
+display:grid;
+grid-template-columns:250px 1fr;
+gap:20px;
+}
 
-    header{
-      background:#121c31;
-      padding:20px;
-      text-align:center;
-      font-size:26px;
-      font-weight:bold;
-      border-bottom:2px solid #1f2d4d;
-    }
+.sidebar{
+background:#111827;
+border-radius:12px;
+padding:20px;
+}
 
-    .container{
-      padding:20px;
-    }
+.sidebar h3{
+margin-bottom:15px;
+color:#00e676;
+}
 
-    .card{
-      background:#18253d;
-      border-radius:12px;
-      padding:20px;
-      margin-bottom:20px;
-    }
+.menu{
+padding:12px;
+margin:8px 0;
+background:#1f2937;
+border-radius:8px;
+cursor:pointer;
+}
 
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-      gap:15px;
-    }
+.content{
+display:grid;
+gap:20px;
+}
 
-    .box{
-      background:#243654;
-      padding:15px;
-      border-radius:10px;
-      text-align:center;
-    }
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
+}
 
-    .value{
-      font-size:24px;
-      margin-top:10px;
-      color:#00ff88;
-      font-weight:bold;
-    }
-  </style>
+.card{
+background:#111827;
+padding:20px;
+border-radius:12px;
+}
+
+.price{
+font-size:28px;
+color:#00e676;
+font-weight:bold;
+margin-top:10px;
+}
+
+.chart{
+height:350px;
+background:#111827;
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+color:#888;
+}
+
+.ai{
+background:#111827;
+padding:20px;
+border-radius:12px;
+}
+
+.signal{
+color:#00ff88;
+font-size:22px;
+font-weight:bold;
+margin-top:15px;
+}
+</style>
 </head>
 
 <body>
@@ -68,47 +101,66 @@ ODERINDE GOLD INTELLIGENCE v3.0
 
 <div class="container">
 
+<div class="sidebar">
+
+<h3>Trading</h3>
+
+<div class="menu">Dashboard</div>
+<div class="menu">Live Markets</div>
+<div class="menu">Smart Money</div>
+<div class="menu">ICT</div>
+<div class="menu">Signals</div>
+<div class="menu">Risk Manager</div>
+<div class="menu">Trade Journal</div>
+<div class="menu">AI Assistant</div>
+<div class="menu">Settings</div>
+
+</div>
+
+<div class="content">
+
+<div class="cards">
+
 <div class="card">
-<h2>System Status</h2>
-
-<div class="grid">
-
-<div class="box">
-Backend
-<div class="value">ONLINE</div>
-</div>
-
-<div class="box">
-Market Feed
-<div class="value">READY</div>
-</div>
-
-<div class="box">
-AI Engine
-<div class="value">READY</div>
-</div>
-
-<div class="box">
-SMC Engine
-<div class="value">READY</div>
-</div>
-
-</div>
-
+EUR/USD
+<div class="price">1.1732</div>
 </div>
 
 <div class="card">
-<h2>Coming Next</h2>
+BTC/USD
+<div class="price">$118,250</div>
+</div>
 
-<ul>
-<li>📈 Live Charts</li>
-<li>💹 Smart Money Concepts</li>
-<li>🤖 AI Trading Assistant</li>
-<li>📊 Market Scanner</li>
-<li>📰 Economic News</li>
-<li>📒 Trade Journal</li>
-<li>⚠️ Alerts</li>
-</ul>
+<div class="card">
+GOLD
+<div class="price">$3528</div>
+</div>
+
+<div class="card">
+US30
+<div class="price">46,230</div>
+</div>
+
+</div>
+
+<div class="chart">
+📈 Live Trading Chart (Coming Next)
+</div>
+
+<div class="ai">
+
+<h2>AI Market Assistant</h2>
+
+<p>
+Market structure remains bullish on higher timeframes.
+Watch for liquidity sweeps before entering long positions.
+</p>
+
+<div class="signal">
+Current Signal: BUY
+</div>
+
+</div>
 
 </div>
 
