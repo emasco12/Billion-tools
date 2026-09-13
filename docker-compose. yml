@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+
+  postgres:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: oderinde
+
+  redis:
+    image: redis:7
