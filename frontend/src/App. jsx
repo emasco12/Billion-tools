@@ -1,0 +1,90 @@
+import { useEffect, useState } from "react";
+
+import "./styles/global.css";
+
+import Sidebar from "./components/Sidebar";
+import Navbar from "./components/Navbar";
+import DashboardCards from "./components/DashboardCards";
+import TradingViewChart from "./components/TradingViewChart";
+import Watchlist from "./components/Watchlist";
+import AIPanel from "./components/AIPanel";
+import NewsPanel from "./components/NewsPanel";
+
+export default function App() {
+
+  const [market, setMarket] = useState(null);
+  const [ai, setAi] = useState(null);
+
+  async function loadData() {
+
+    try {
+
+      const marketRes = await fetch("/api/market");
+      const marketData = await marketRes.json();
+
+      const aiRes = await fetch("/api/ai");
+      const aiData = await aiRes.json();
+
+      setMarket(marketData);
+      setAi(aiData);
+
+    } catch (err) {
+
+      console.error(err);
+
+    }
+
+  }
+
+  useEffect(() => {
+
+    loadData();
+
+    const timer = setInterval(loadData, 5000);
+
+    return () => clearInterval(timer);
+
+  }, []);
+
+  return (
+
+    <div className="app">
+
+      <Sidebar />
+
+      <main className="main">
+
+        <Navbar />
+
+        <DashboardCards
+          market={market}
+          ai={ai}
+        />
+
+        <TradingViewChart />
+
+        <div className="bottom">
+
+          <Watchlist market={market} />
+
+          <AIPanel ai={ai} />
+
+        </div>
+
+        <div
+          style={{
+            marginTop:20
+          }}
+        >
+
+          <NewsPanel />
+
+        </div>
+
+      </main>
+
+    </div>
+
+  );
+
+}
