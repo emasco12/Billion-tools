@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./styles/global.css";
-
+import PriceTicker from "./components/PriceTicker";
 import MarketScreener from "./components/MarketScreener";
 import TradingViewChart from "./components/TradingViewChart";
 import AIPanel from "./components/AIPanel";
@@ -52,7 +52,7 @@ export default function App() {
       <main className="main">
 
         <Navbar />
-
+<PriceTicker />
         <DashboardCards
           market={market}
           ai={ai}
