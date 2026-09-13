@@ -1,4 +1,6 @@
-const express = require("express");
+const marketRoutes = require("./routes/market");
+const aiRoutes = require("./routes/ai");
+const newsRoutes = require("./routes/news");const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 
