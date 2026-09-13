@@ -1,37 +1,33 @@
 const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
-
+app.use(cors());
 app.use(express.json());
 
+const PORT = process.env.PORT || 3000;
+
 app.get("/", (req, res) => {
-  res.json({
-    name: "ODERINDE GOLD INTELLIGENCE",
-    version: "3.0.0",
-    status: "Running",
-    message: "Welcome to the Professional AI Trading Platform",
-    features: [
-      "Smart Money Concepts",
-      "ICT",
-      "AI Trading Assistant",
-      "Market Scanner",
-      "Risk Management",
-      "Trade Journal",
-      "Analytics"
-    ]
-  });
+    res.json({
+        app: "ODERINDE GOLD INTELLIGENCE",
+        version: "3.0.0",
+        status: "ONLINE",
+        serverTime: new Date().toISOString()
+    });
 });
 
-app.get("/health", (req, res) => {
-  res.json({
-    success: true,
-    uptime: process.uptime(),
-    timestamp: new Date().toISOString()
-  });
+app.get("/api/status", (req, res) => {
+    res.json({
+        backend: true,
+        ai: "READY",
+        smc: "READY",
+        websocket: "COMING SOON",
+        marketData: "COMING SOON"
+    });
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
