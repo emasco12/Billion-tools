@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react";
-
 import "./styles/global.css";
 
+import MarketScreener from "./components/MarketScreener";
+import TradingViewChart from "./components/TradingViewChart";
+import AIPanel from "./components/AIPanel";
+import Watchlist from "./components/Watchlist";
+import NewsPanel from "./components/NewsPanel";
+import DashboardCards from "./components/DashboardCards";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
-import DashboardCards from "./components/DashboardCards";
-import TradingViewChart from "./components/TradingViewChart";
-import Watchlist from "./components/Watchlist";
-import AIPanel from "./components/AIPanel";
-import NewsPanel from "./components/NewsPanel";
 
 export default function App() {
 
   const [market, setMarket] = useState(null);
   const [ai, setAi] = useState(null);
+  const [symbol, setSymbol] = useState("OANDA:XAUUSD");
 
   async function loadData() {
-
     try {
 
       const marketRes = await fetch("/api/market");
@@ -29,11 +29,8 @@ export default function App() {
       setAi(aiData);
 
     } catch (err) {
-
       console.error(err);
-
     }
-
   }
 
   useEffect(() => {
@@ -61,7 +58,13 @@ export default function App() {
           ai={ai}
         />
 
-        <TradingViewChart />
+        <MarketScreener
+          onSelect={setSymbol}
+        />
+
+        <TradingViewChart
+          symbol={symbol}
+        />
 
         <div className="bottom">
 
@@ -71,11 +74,7 @@ export default function App() {
 
         </div>
 
-        <div
-          style={{
-            marginTop:20
-          }}
-        >
+        <div style={{ marginTop: 20 }}>
 
           <NewsPanel />
 
