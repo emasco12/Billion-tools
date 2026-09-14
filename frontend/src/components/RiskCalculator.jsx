@@ -10,7 +10,7 @@ export default function RiskCalculator() {
     <div className="panel">
       <h2>Risk Calculator</h2>
 
-      <p>Account Balance ($)</p>
+      <label>Account Balance ($)</label>
       <input
         type="number"
         value={balance}
@@ -19,7 +19,7 @@ export default function RiskCalculator() {
 
       <br /><br />
 
-      <p>Risk (%)</p>
+      <label>Risk Per Trade (%)</label>
       <input
         type="number"
         value={risk}
@@ -28,7 +28,8 @@ export default function RiskCalculator() {
 
       <br /><br />
 
-      <h3>Risk Amount</h3>
+      <h3>Maximum Risk</h3>
+
       <h2 style={{ color: "#00ff88" }}>
         ${riskAmount.toFixed(2)}
       </h2>
