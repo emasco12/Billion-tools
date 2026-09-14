@@ -23,21 +23,8 @@ async function getMarketData() {
     const quotes = twelve.data;
 
     const data = {
-      forex: [
-        quotes["EUR/USD"],
-        quotes["GBP/USD"],
-        quotes["USD/JPY"]
-      ],
-      commodities: [
-        quotes["XAU/USD"],
-        quotes["XAG/USD"],
-        
-      ],
-      crypto: [
-        { symbol: "BTC/USDT", price: btc.data.price },
-        { symbol: "ETH/USDT", price: eth.data.price }
-      ]
-    };
+  gold: quotes["XAU/USD"]
+};
 
     cache.set("market", data);
     return data;
