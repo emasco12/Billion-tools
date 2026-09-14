@@ -4,16 +4,17 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
 
-    res.json({
-
-        recommendation: "BUY",
-
-        confidence: "86%",
-
-        comment:
-            "Bullish momentum remains strong. Wait for a pullback into a demand zone before entering."
-
-    });
+  res.json({
+    pair: "XAU/USD",
+    action: "BUY",
+    confidence: 87,
+    recommendation: "BUY",
+    comment: "Bullish momentum detected.",
+    entry: "3588.40",
+    stopLoss: "3579.20",
+    takeProfit: "3615.00",
+    riskReward: "1 : 3"
+  });
 
 });
 
