@@ -1,14 +1,28 @@
 export default function Navbar() {
   return (
-    <header className="topbar">
+    <header
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: "20px"
+      }}
+    >
       <div>
         <h1>ODERINDE GOLD INTELLIGENCE</h1>
-        <p>Professional Trading Terminal</p>
+        <p>Professional AI Trading Platform</p>
       </div>
 
-      <div className="status">
-        <span className="live"></span>
-        LIVE MARKET
+      <div
+        style={{
+          background: "#00ff88",
+          color: "#111",
+          padding: "10px 18px",
+          borderRadius: "10px",
+          fontWeight: "bold"
+        }}
+      >
+        LIVE
       </div>
     </header>
   );
