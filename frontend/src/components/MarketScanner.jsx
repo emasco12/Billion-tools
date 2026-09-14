@@ -1,8 +1,6 @@
 export default function MarketScanner({ market }) {
 
-  const forex = market?.forex || [];
-  const crypto = market?.crypto || [];
-  const commodities = market?.commodities || [];
+  if (!market) return <div className="panel">Loading Market...</div>;
 
   return (
     <div className="panel">
@@ -10,30 +8,36 @@ export default function MarketScanner({ market }) {
       <h2>Market Scanner</h2>
 
       <h3>Forex</h3>
-
-      {forex.map(item => (
+      {market.forex.map(item => (
         <p key={item.symbol}>
-          {item.symbol} : {item.price}
+          {item.symbol} : {item.price} ({item.change})
         </p>
       ))}
 
-      <br />
+      <hr />
 
       <h3>Crypto</h3>
-
-      {crypto.map(item => (
+      {market.crypto.map(item => (
         <p key={item.symbol}>
-          {item.symbol} : {item.price}
+          {item.symbol} : {item.price} ({item.change})
         </p>
       ))}
 
-      <br />
+      <hr />
 
-      <h3>Commodities</h3>
-
-      {commodities.map(item => (
+      <h3>Gold & Commodities</h3>
+      {market.commodities.map(item => (
         <p key={item.symbol}>
-          {item.symbol} : {item.price}
+          {item.symbol} : {item.price} ({item.change})
+        </p>
+      ))}
+
+      <hr />
+
+      <h3>Indices</h3>
+      {market.indices.map(item => (
+        <p key={item.symbol}>
+          {item.symbol} : {item.price} ({item.change})
         </p>
       ))}
 
