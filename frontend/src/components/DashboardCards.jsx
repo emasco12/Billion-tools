@@ -1,9 +1,6 @@
 export default function DashboardCards({ market, ai }) {
-
   return (
-
-    <section className="cards">
-
+    <div className="cards">
       <div className="card">
         <h3>EUR/USD</h3>
         <h2>{market?.forex?.[0]?.price ?? "--"}</h2>
@@ -23,9 +20,6 @@ export default function DashboardCards({ market, ai }) {
         <h3>AI Signal</h3>
         <h2>{ai?.recommendation ?? "WAIT"}</h2>
       </div>
-
-    </section>
-
+    </div>
   );
-
 }
