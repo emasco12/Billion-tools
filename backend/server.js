@@ -1,75 +1,14 @@
-const express = require("express");
-const cors = require("cors");
-require("dotenv").config();
-
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-// Routes
 const marketRoutes = require("./routes/market");
+console.log("market:", typeof marketRoutes);
+
 const aiRoutes = require("./routes/ai");
+console.log("ai:", typeof aiRoutes);
+
 const newsRoutes = require("./routes/news");
+console.log("news:", typeof newsRoutes);
+
 const authRoutes = require("./routes/auth");
+console.log("auth:", typeof authRoutes);
+
 const calendarRoutes = require("./routes/calendar");
-
-// Middleware
-app.use(cors());
-app.use(express.json());
-
-// API Routes
-app.use("/api/market", marketRoutes);
-app.use("/api/ai", aiRoutes);
-app.use("/api/news", newsRoutes);
-app.use("/api/auth", authRoutes);
-app.use("/api/calendar", calendarRoutes);
-
-// Home
-app.get("/", (req, res) => {
-  res.json({
-    app: "ODERINDE GOLD INTELLIGENCE",
-    version: "3.1.0",
-    status: "ONLINE",
-    developer: "Oderinde Gold Intelligence Team"
-  });
-});
-
-// Status
-app.get("/api/status", (req, res) => {
-  res.json({
-    success: true,
-    status: "Server Running",
-    time: new Date().toISOString(),
-    uptime: process.uptime()
-  });
-});
-
-// 404
-app.use((req, res) => {
-  res.status(404).json({
-    success: false,
-    message: "Route not found"
-  });
-});
-
-// Error Handler
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-
-  res.status(500).json({
-    success: false,
-    message: "Internal Server Error"
-  });
-});
-
-// Start Server
-app.listen(PORT, () => {
-  console.log(`
-====================================
- ODERINDE GOLD INTELLIGENCE
-====================================
- Server running on port ${PORT}
- Environment: ${process.env.NODE_ENV || "development"}
- API: http://localhost:${PORT}
-====================================
-`);
-});
+console.log("calendar:", typeof calendarRoutes);
