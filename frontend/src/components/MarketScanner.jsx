@@ -1,48 +1,41 @@
-import { useState } from "react";
+export default function MarketScanner({ market }) {
 
-const markets = [
-  { symbol: "OANDA:EURUSD", name: "EUR/USD" },
-  { symbol: "OANDA:GBPUSD", name: "GBP/USD" },
-  { symbol: "OANDA:USDJPY", name: "USD/JPY" },
-  { symbol: "OANDA:XAUUSD", name: "Gold" },
-  { symbol: "BINANCE:BTCUSDT", name: "Bitcoin" },
-  { symbol: "BINANCE:ETHUSDT", name: "Ethereum" },
-  { symbol: "FOREXCOM:US30", name: "US30" },
-  { symbol: "FOREXCOM:NSXUSD", name: "NAS100" }
-];
-
-export default function MarketScreener({ onSelect }) {
-  const [active, setActive] = useState(markets[3].symbol);
-
-  function selectMarket(item) {
-    setActive(item.symbol);
-    if (onSelect) onSelect(item.symbol);
-  }
+  const forex = market?.forex || [];
+  const crypto = market?.crypto || [];
+  const commodities = market?.commodities || [];
 
   return (
     <div className="panel">
 
-      <h2>Market Screener</h2>
+      <h2>Market Scanner</h2>
 
-      <div className="market-grid">
+      <h3>Forex</h3>
 
-        {markets.map((item) => (
+      {forex.map(item => (
+        <p key={item.symbol}>
+          {item.symbol} : {item.price}
+        </p>
+      ))}
 
-          <button
-            key={item.symbol}
-            className={
-              active === item.symbol
-                ? "market-btn active"
-                : "market-btn"
-            }
-            onClick={() => selectMarket(item)}
-          >
-            {item.name}
-          </button>
+      <br />
 
-        ))}
+      <h3>Crypto</h3>
 
-      </div>
+      {crypto.map(item => (
+        <p key={item.symbol}>
+          {item.symbol} : {item.price}
+        </p>
+      ))}
+
+      <br />
+
+      <h3>Commodities</h3>
+
+      {commodities.map(item => (
+        <p key={item.symbol}>
+          {item.symbol} : {item.price}
+        </p>
+      ))}
 
     </div>
   );
