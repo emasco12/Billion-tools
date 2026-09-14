@@ -60,6 +60,21 @@ router.get("/", async (req, res) => {
     confidence = Math.floor(Math.random() * 21) + 40;
   }
 
+  // Market Session
+  const hour = new Date().getUTCHours();
+
+  let marketSession;
+
+  if (hour >= 21 || hour < 6) {
+    marketSession = "Sydney";
+  } else if (hour >= 6 && hour < 8) {
+    marketSession = "Tokyo";
+  } else if (hour >= 8 && hour < 16) {
+    marketSession = "London";
+  } else {
+    marketSession = "New York";
+  }
+
   res.json({
     recommendation: signal,
     confidence: confidence + "%",
@@ -68,6 +83,7 @@ router.get("/", async (req, res) => {
     takeProfit: takeProfit.toFixed(2),
     riskReward: "1:3",
     trend,
+    marketSession,
     smartMoney:
       signal === "BUY"
         ? "Institutions accumulating positions."
