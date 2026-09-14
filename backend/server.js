@@ -1,83 +1,69 @@
-const marketRoutes = require("./routes/market");
-const aiRoutes = require("./routes/ai");
-const newsRoutes = require("./routes/news");const express = require("express");
+const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
+
+const marketRoutes = require("./routes/market");
+const aiRoutes = require("./routes/ai");
+const newsRoutes = require("./routes/news");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
+
+// API Routes
 app.use("/api/market", marketRoutes);
 app.use("/api/ai", aiRoutes);
 app.use("/api/news", newsRoutes);
-const random = (min, max) => +(Math.random() * (max - min) + min).toFixed(4);
 
+// Home Route
 app.get("/", (req, res) => {
   res.json({
     app: "ODERINDE GOLD INTELLIGENCE",
     version: "3.1.0",
-    status: "ONLINE"
+    status: "ONLINE",
+    developer: "Oderinde Gold Intelligence Team"
   });
 });
 
+// Status Route
 app.get("/api/status", (req, res) => {
   res.json({
-    backend: "ONLINE",
-    ai: "READY",
-    market: "LIVE",
-    websocket: "COMING SOON",
-    timestamp: new Date().toISOString()
+    success: true,
+    status: "Server Running",
+    time: new Date().toISOString(),
+    uptime: process.uptime()
   });
 });
 
-app.get("/api/market", (req, res) => {
-  res.json({
-    forex: [
-      { symbol: "EUR/USD", price: random(1.1700, 1.1800), change: random(-1, 1) },
-      { symbol: "GBP/USD", price: random(1.3500, 1.3700), change: random(-1, 1) },
-      { symbol: "USD/JPY", price: random(147, 149), change: random(-1, 1) }
-    ],
-    crypto: [
-      { symbol: "BTC/USD", price: random(118000, 119000), change: random(-3, 3) },
-      { symbol: "ETH/USD", price: random(4700, 4900), change: random(-3, 3) }
-    ],
-    commodities: [
-      { symbol: "GOLD", price: random(3500, 3550), change: random(-1, 1) },
-      { symbol: "SILVER", price: random(42, 44), change: random(-1, 1) }
-    ],
-    indices: [
-      { symbol: "US30", price: Math.round(random(46000, 46500)) }
-    ]
+// 404 Handler
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: "Route not found"
   });
 });
 
-app.get("/api/ai", (req, res) => {
-  const signals = ["BUY", "SELL", "WAIT"];
+// Error Handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
 
-  res.json({
-    recommendation: signals[Math.floor(Math.random() * signals.length)],
-    confidence: Math.round(random(70, 98)) + "%",
-    comment:
-      "Trend remains intact. Wait for confirmation before entering a position."
+  res.status(500).json({
+    success: false,
+    message: "Internal Server Error"
   });
 });
 
-app.get("/api/news", (req, res) => {
-  res.json([
-    {
-      title: "USD strengthens ahead of major economic releases"
-    },
-    {
-      title: "Gold remains supported by global uncertainty"
-    },
-    {
-      title: "Bitcoin trades near recent highs"
-    }
-  ]);
-});
-
+// Start Server
 app.listen(PORT, () => {
-  console.log(`🚀 ODERINDE GOLD INTELLIGENCE running on port ${PORT}`);
+  console.log(`
+====================================
+ ODERINDE GOLD INTELLIGENCE
+====================================
+ Server running on port ${PORT}
+ Environment: ${process.env.NODE_ENV || "development"}
+ API: http://localhost:${PORT}
+====================================
+`);
 });
