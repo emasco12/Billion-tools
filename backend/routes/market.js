@@ -8,11 +8,9 @@ router.get("/", async (req, res) => {
     const data = await getMarketData();
     res.json(data);
   } catch (err) {
-    console.error(err);
-
     res.status(500).json({
       success: false,
-      message: "Unable to load market data"
+      message: err.message
     });
   }
 });
