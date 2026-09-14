@@ -12,6 +12,7 @@ import RiskCalculator from "./components/RiskCalculator";
 import AIPanel from "./components/AIPanel";
 import Watchlist from "./components/Watchlist";
 import NewsPanel from "./components/NewsPanel";
+import SmartMoney from "./components/SmartMoney";
 
 export default function App() {
   const [market, setMarket] = useState(null);
@@ -56,16 +57,18 @@ export default function App() {
         </section>
 
         <div className="bottom">
-          <SignalCard ai={ai} />
 
-          <RiskCalculator />
+  <SignalCard ai={ai} />
 
-          <Watchlist market={market} />
+  <SmartMoney ai={ai} />
 
-          <AIPanel ai={ai} />
-        </div>
+  <RiskCalculator />
 
-        <br />
+  <Watchlist market={market} />
+
+  <AIPanel ai={ai} />
+
+</div>
 
         <NewsPanel />
       </main>
