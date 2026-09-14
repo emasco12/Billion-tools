@@ -1,35 +1,23 @@
 const express = require("express");
-
 const router = express.Router();
 
 router.get("/", (req, res) => {
-
-    res.json({
-
-        forex: [
-
-            { symbol: "EUR/USD", price: 1.1742, change: "+0.18%" },
-            { symbol: "GBP/USD", price: 1.3568, change: "-0.06%" },
-            { symbol: "USD/JPY", price: 148.22, change: "+0.42%" }
-
-        ],
-
-        crypto: [
-
-            { symbol: "BTC/USD", price: 118450, change: "+2.14%" },
-            { symbol: "ETH/USD", price: 4825, change: "+1.08%" }
-
-        ],
-
-        commodities: [
-
-            { symbol: "Gold", price: 3588.45, change: "+0.37%" },
-            { symbol: "Silver", price: 41.22, change: "-0.12%" }
-
-        ]
-
-    });
-
+  res.json({
+    forex: [
+      { symbol: "EUR/USD", price: "1.1742" },
+      { symbol: "GBP/USD", price: "1.3615" },
+      { symbol: "USD/JPY", price: "147.83" }
+    ],
+    crypto: [
+      { symbol: "BTC/USD", price: "118450" },
+      { symbol: "ETH/USD", price: "4650" }
+    ],
+    commodities: [
+      { symbol: "XAU/USD", price: "3588.40" },
+      { symbol: "Silver", price: "39.12" },
+      { symbol: "WTI Oil", price: "72.84" }
+    ]
+  });
 });
 
 module.exports = router;
