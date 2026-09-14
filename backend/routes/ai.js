@@ -122,16 +122,16 @@ router.get("/", async (req, res) => {
 
   if (signal === "BUY") {
     strengthScore = 88;
-    buyProbability = "82%";
-    sellProbability = "18%";
+    buyProbability = "88%";
+    sellProbability = "12%";
     overallSignal = "STRONG BUY";
   } else if (signal === "SELL") {
-    strengthScore = 27;
-    buyProbability = "22%";
-    sellProbability = "78%";
+    strengthScore = 82;
+    buyProbability = "18%";
+    sellProbability = "82%";
     overallSignal = "STRONG SELL";
   } else {
-    strengthScore = 52;
+    strengthScore = 50;
     buyProbability = "50%";
     sellProbability = "50%";
     overallSignal = "WAIT";
@@ -143,6 +143,7 @@ router.get("/", async (req, res) => {
     entry: entry.toFixed(2),
     stopLoss: stopLoss.toFixed(2),
     takeProfit: takeProfit.toFixed(2),
+
     riskReward: "1:3",
 
     trend,
@@ -174,7 +175,6 @@ router.get("/", async (req, res) => {
         : signal === "SELL"
         ? "AI detects a selling opportunity."
         : "Wait for confirmation."
-
   });
 
 });
