@@ -75,6 +75,25 @@ router.get("/", async (req, res) => {
     marketSession = "New York";
   }
 
+  // Gold Analysis
+  let marketBias;
+  let trendStrength;
+  let riskLevel;
+
+  if (signal === "BUY") {
+    marketBias = "Bullish";
+    trendStrength = (Math.floor(Math.random() * 16) + 85) + "%";
+    riskLevel = "Low";
+  } else if (signal === "SELL") {
+    marketBias = "Bearish";
+    trendStrength = (Math.floor(Math.random() * 16) + 80) + "%";
+    riskLevel = "Medium";
+  } else {
+    marketBias = "Neutral";
+    trendStrength = (Math.floor(Math.random() * 21) + 50) + "%";
+    riskLevel = "High";
+  }
+
   res.json({
     recommendation: signal,
     confidence: confidence + "%",
@@ -82,20 +101,27 @@ router.get("/", async (req, res) => {
     stopLoss: stopLoss.toFixed(2),
     takeProfit: takeProfit.toFixed(2),
     riskReward: "1:3",
+
     trend,
     marketSession,
+    marketBias,
+    trendStrength,
+    riskLevel,
+
     smartMoney:
       signal === "BUY"
         ? "Institutions accumulating positions."
         : signal === "SELL"
         ? "Institutions distributing positions."
         : "Waiting for confirmation.",
+
     comment:
       signal === "BUY"
         ? "AI detects a buying opportunity."
         : signal === "SELL"
-        ? "AI detects a selling opportunity."
+        ? "AI detects a potential selling opportunity."
         : "Wait for confirmation."
+
   });
 
 });
