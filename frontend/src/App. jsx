@@ -1,25 +1,23 @@
 import { useEffect, useState } from "react";
 import "./styles/global.css";
+
+import Sidebar from "./components/Sidebar";
+import Navbar from "./components/Navbar";
 import PriceTicker from "./components/PriceTicker";
-import MarketScreener from "./components/MarketScreener";
-import TradingViewChart from "./components/TradingViewChart";
+import DashboardCards from "./components/DashboardCards";
+import MarketScanner from "./components/MarketScanner";
+import TradingChart from "./components/TradingChart";
+import SignalCard from "./components/SignalCard";
 import AIPanel from "./components/AIPanel";
 import Watchlist from "./components/Watchlist";
 import NewsPanel from "./components/NewsPanel";
-import DashboardCards from "./components/DashboardCards";
-<MarketScanner />
-import Sidebar from "./components/Sidebar";
-import Navbar from "./components/Navbar";
-import MarketScanner from "./components/MarketScanner";
-export default function App() {
 
+export default function App() {
   const [market, setMarket] = useState(null);
   const [ai, setAi] = useState(null);
-  const [symbol, setSymbol] = useState("OANDA:XAUUSD");
 
   async function loadData() {
     try {
-
       const marketRes = await fetch("/api/market");
       const marketData = await marketRes.json();
 
@@ -28,63 +26,46 @@ export default function App() {
 
       setMarket(marketData);
       setAi(aiData);
-
     } catch (err) {
       console.error(err);
     }
   }
 
   useEffect(() => {
-
     loadData();
-
     const timer = setInterval(loadData, 5000);
-
     return () => clearInterval(timer);
-
   }, []);
 
   return (
-
     <div className="app">
-
       <Sidebar />
 
       <main className="main">
-
         <Navbar />
-<PriceTicker />
-        <DashboardCards
-          market={market}
-          ai={ai}
-        />
 
-        <MarketScreener
-          onSelect={setSymbol}
-        />
+        <PriceTicker market={market} />
 
-        <TradingViewChart
-          symbol={symbol}
-        />
+        <DashboardCards market={market} ai={ai} />
+
+        <MarketScanner />
+
+        <section className="chart">
+          <TradingChart />
+        </section>
 
         <div className="bottom">
+          <SignalCard />
 
           <Watchlist market={market} />
 
           <AIPanel ai={ai} />
-
         </div>
 
-        <div style={{ marginTop: 20 }}>
+        <br />
 
-          <NewsPanel />
-
-        </div>
-
+        <NewsPanel />
       </main>
-
     </div>
-
   );
-
 }
