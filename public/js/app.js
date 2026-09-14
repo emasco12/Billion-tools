@@ -32,16 +32,27 @@ async function loadMarket() {
 
 async function loadAI() {
 
-    const res = await fetch(`${API}/ai`);
-    const data = await res.json();
+    try {
 
-    document.getElementById("signal").innerHTML = data.recommendation;
-    document.getElementById("confidence").innerHTML = data.confidence;
-    document.getElementById("analysis").innerHTML = data.comment;
-    document.getElementById("trend").innerHTML = data.trend;
-    document.getElementById("entry").innerHTML = data.entry;
-    document.getElementById("support").innerHTML = data.stopLoss;
-    document.getElementById("resistance").innerHTML = data.takeProfit;
+        const res = await fetch(`${API}/ai`);
+        const data = await res.json();
+
+        document.getElementById("signal").innerHTML = data.recommendation;
+        document.getElementById("confidence").innerHTML = data.confidence;
+        document.getElementById("analysis").innerHTML = data.comment;
+        document.getElementById("trend").innerHTML = data.trend;
+
+        // NEW
+        document.getElementById("marketSession").innerHTML =
+            data.marketSession;
+
+        document.getElementById("entry").innerHTML = data.entry;
+        document.getElementById("support").innerHTML = data.stopLoss;
+        document.getElementById("resistance").innerHTML = data.takeProfit;
+
+    } catch (e) {
+        console.log(e);
+    }
 
 }
 
@@ -67,23 +78,29 @@ async function loadSentiment() {
 
 async function loadNews() {
 
-    const res = await fetch(`${API}/news`);
-    const news = await res.json();
+    try {
 
-    let html = "";
+        const res = await fetch(`${API}/news`);
+        const news = await res.json();
 
-    news.forEach(item => {
+        let html = "";
 
-        html += `
-        <div class="news-item">
-            <div class="news-title">${item.title}</div>
-            <div class="news-source">${item.source}</div>
-        </div>
-        `;
+        news.forEach(item => {
 
-    });
+            html += `
+            <div class="news-item">
+                <div class="news-title">${item.title}</div>
+                <div class="news-source">${item.source}</div>
+            </div>
+            `;
 
-    document.getElementById("newsList").innerHTML = html;
+        });
+
+        document.getElementById("newsList").innerHTML = html;
+
+    } catch (e) {
+        console.log(e);
+    }
 
 }
 
@@ -91,25 +108,31 @@ async function loadNews() {
 
 async function loadCalendar() {
 
-    const res = await fetch(`${API}/calendar`);
-    const events = await res.json();
+    try {
 
-    let html = "";
+        const res = await fetch(`${API}/calendar`);
+        const events = await res.json();
 
-    events.forEach(item => {
+        let html = "";
 
-        html += `
-        <div class="calendar-item">
-            <strong>${item.currency}</strong>
-            ${item.event}
-            <br>
-            ${item.time}
-        </div>
-        `;
+        events.forEach(item => {
 
-    });
+            html += `
+            <div class="calendar-item">
+                <strong>${item.currency}</strong>
+                ${item.event}
+                <br>
+                ${item.time}
+            </div>
+            `;
 
-    document.getElementById("calendarList").innerHTML = html;
+        });
+
+        document.getElementById("calendarList").innerHTML = html;
+
+    } catch (e) {
+        console.log(e);
+    }
 
 }
 
