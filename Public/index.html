@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ODERINDE GOLD INTELLIGENCE</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+<div class="logo">
+
+<div class="logo-icon">
+<i class="fas fa-coins"></i>
+</div>
+
+<div>
+
+<h2>ODERINDE</h2>
+
+<span>Gold Intelligence</span>
+
+</div>
+
+</div>
+
+<nav>
+
+<a class="active">
+
+<i class="fas fa-house"></i>
+
+<span>Dashboard</span>
+
+</a>
+
+<a>
+
+<i class="fas fa-chart-line"></i>
+
+<span>Gold Intelligence</span>
+
+</a>
+
+<a>
+
+<i class="fas fa-chart-area"></i>
+
+<span>Gold Analysis</span>
+
+</a>
+
+<a>
+
+<i class="fas fa-magnifying-glass-chart"></i>
+
+<span>Gold Scanner</span>
+
+</a>
+
+<a>
+
+<i class="fas fa-bullseye"></i>
+
+<span>Gold Zones</span>
+
+</a>
+
+<a>
+
+<i class="fas fa-newspaper"></i>
+
+<span>Gold News</span>
+
+</a>
+
+<a>
+
+<i class="fas fa-calendar-days"></i>
+
+<span>Economic Calendar</span>
+
+</a>
+
+<a>
+
+<i class="fas fa-calculator"></i>
+
+<span>Gold Tools</span>
+
+</a>
+
+<a>
+
+<i class="fas fa-robot"></i>
+
+<span>AI Assistant</span>
+
+</a>
+
+<a>
+
+<i class="fas fa-gear"></i>
+
+<span>Settings</span>
+
+</a>
+
+</nav>
+
+</aside>
+
+<!-- MAIN -->
+
+<main class="main">
+
+<header class="topbar">
+
+<div>
+
+<h1>
+
+ODERINDE GOLD INTELLIGENCE
+
+</h1>
+
+<p>
+
+Professional Gold Intelligence Platform
+
+</p>
+
+</div>
+
+<div class="actions">
+
+<button>
+
+<i class="fas fa-bell"></i>
+
+</button>
+
+<button>
+
+<i class="fas fa-user"></i>
+
+</button>
+
+</div>
+
+</header>
+
+<section class="dashboard">
+
+<!-- Dashboard cards begin here --><!-- Row 1 -->
+
+<div class="grid">
+
+<div class="card gold-card">
+
+<h3>
+<i class="fas fa-coins"></i>
+Live Gold Price
+</h3>
+
+<h1 id="goldPrice">
+Loading...
+</h1>
+
+<p id="goldChange">
+Connecting...
+</p>
+
+<small id="goldUpdated">
+Waiting for live data...
+</small>
+
+</div>
+
+<div class="card ai-card">
+
+<h3>
+🤖 AI Gold Intelligence
+</h3>
+
+<div class="signal">
+
+<span id="signal">
+WAIT
+</span>
+
+</div>
+
+<p>
+
+Confidence
+
+<strong id="confidence">
+
+--
+
+</strong>
+
+</p>
+
+<p id="analysis">
+
+Loading AI...
+
+</p>
+
+</div>
+
+</div>
+
+<!-- Row 2 -->
+
+<div class="grid">
+
+<div class="card">
+
+<h3>
+📊 Market Sentiment
+</h3>
+
+<h2 id="sentiment">
+
+Loading...
+
+</h2>
+
+</div>
+
+<div class="card">
+
+<h3>
+📈 Trend
+</h3>
+
+<h2 id="trend">
+
+Loading...
+
+</h2>
+
+</div>
+
+<div class="card">
+
+<h3>
+⚡ Volatility
+</h3>
+
+<h2 id="volatility">
+
+Loading...
+
+</h2>
+
+</div>
+
+</div>
+
+<!-- Row 3 -->
+
+<div class="grid">
+
+<div class="card">
+
+<h3>
+
+🎯 Support
+
+</h3>
+
+<h2 id="support">
+
+--
+
+</h2>
+
+</div>
+
+<div class="card">
+
+<h3>
+
+🚀 Resistance
+
+</h3>
+
+<h2 id="resistance">
+
+--
+
+</h2>
+
+</div>
+
+<div class="card">
+
+<h3>
+
+💰 Entry Zone
+
+</h3>
+
+<h2 id="entry">
+
+--
+
+</h2>
+
+</div>
+
+</div>
+
+<!-- Row 4 -->
+
+<div class="grid">
+
+<div class="card news">
+
+<h3>
+
+📰 Gold News
+
+</h3>
+
+<div id="newsList">
+
+Loading...
+
+</div>
+
+</div>
+
+<div class="card calendar">
+
+<h3>
+
+📅 Economic Calendar
+
+</h3>
+
+<div id="calendarList">
+
+Loading...
+
+</div>
+
+</div>
+
+</div><!-- Row 5 -->
+
+<div class="grid">
+
+<div class="card analysis">
+
+<h3>🟡 Gold Analysis</h3>
+
+<div class="analysis-row">
+<span>Market Bias</span>
+<strong id="marketBias">Loading...</strong>
+</div>
+
+<div class="analysis-row">
+<span>Trend Strength</span>
+<strong id="trendStrength">Loading...</strong>
+</div>
+
+<div class="analysis-row">
+<span>Risk Level</span>
+<strong id="riskLevel">Loading...</strong>
+</div>
+
+<div class="analysis-row">
+<span>Market Session</span>
+<strong id="marketSession">Loading...</strong>
+</div>
+
+</div>
+
+<div class="card scanner">
+
+<h3>📡 Gold Scanner</h3>
+
+<div class="analysis-row">
+<span>Breakout</span>
+<strong id="breakoutStatus">Scanning...</strong>
+</div>
+
+<div class="analysis-row">
+<span>Momentum</span>
+<strong id="momentumStatus">Scanning...</strong>
+</div>
+
+<div class="analysis-row">
+<span>Trend</span>
+<strong id="scannerTrend">Scanning...</strong>
+</div>
+
+<div class="analysis-row">
+<span>Volatility</span>
+<strong id="scannerVolatility">Scanning...</strong>
+</div>
+
+</div>
+
+</div>
+
+<!-- Row 6 -->
+
+<div class="grid">
+
+<div class="card tools">
+
+<h3>🧮 Gold Tools</h3>
+
+<button class="tool-btn">Risk Calculator</button>
+
+<button class="tool-btn">Position Size</button>
+
+<button class="tool-btn">Profit Calculator</button>
+
+<button class="tool-btn">Pip Calculator</button>
+
+</div>
+
+<div class="card assistant">
+
+<h3>🤖 AI Gold Assistant</h3>
+
+<textarea
+id="aiQuestion"
+placeholder="Ask anything about Gold..."
+></textarea>
+
+<button id="askAI">
+
+Ask AI
+
+</button>
+
+<div id="aiResponse">
+
+AI response will appear here...
+
+</div>
+
+</div>
+
+</div><!-- End Dashboard -->
+
+</section>
+
+</main>
+
+</div>
+
+<script src="js/app.js"></script>
+
+</body>
+
+  </html>
