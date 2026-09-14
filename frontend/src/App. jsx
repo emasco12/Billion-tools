@@ -51,7 +51,7 @@ export default function App() {
 
         <DashboardCards market={market} ai={ai} />
 
-        <MarketScanner />
+        <MarketScanner market={market} />
 
         <section className="chart">
           <TradingChart />
