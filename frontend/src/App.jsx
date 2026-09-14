@@ -103,12 +103,8 @@ export default function App() {
         </section>
 
         <section className="chart">
-
-          <h2>TradingView Chart</h2>
-
-          <p>Integration comes next.</p>
-
-        </section>
+  <TradingChart />
+</section>
 
         <section className="bottom">
 
