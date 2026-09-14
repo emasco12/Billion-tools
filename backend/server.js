@@ -1,3 +1,4 @@
+const calendarRoutes = require("./routes/calendar");
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
@@ -18,6 +19,7 @@ app.use("/api/market", marketRoutes);
 app.use("/api/ai", aiRoutes);
 app.use("/api/news", newsRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/calendar", calendarRoutes);
 
 // Home Route
 app.get("/", (req, res) => {
