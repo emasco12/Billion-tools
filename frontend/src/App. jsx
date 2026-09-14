@@ -8,6 +8,7 @@ import DashboardCards from "./components/DashboardCards";
 import MarketScanner from "./components/MarketScanner";
 import TradingChart from "./components/TradingChart";
 import SignalCard from "./components/SignalCard";
+import RiskCalculator from "./components/RiskCalculator";
 import AIPanel from "./components/AIPanel";
 import Watchlist from "./components/Watchlist";
 import NewsPanel from "./components/NewsPanel";
@@ -56,6 +57,8 @@ export default function App() {
 
         <div className="bottom">
           <SignalCard />
+
+          <RiskCalculator />
 
           <Watchlist market={market} />
 
