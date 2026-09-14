@@ -18,6 +18,12 @@ async function loadAI() {
         document.getElementById("marketSession").innerHTML = data.marketSession;
         document.getElementById("riskReward").innerHTML = data.riskReward;
 
+        // Gold Scanner
+        document.getElementById("breakoutStatus").innerHTML = data.breakoutStatus;
+        document.getElementById("momentumStatus").innerHTML = data.momentumStatus;
+        document.getElementById("scannerTrend").innerHTML = data.scannerTrend;
+        document.getElementById("scannerVolatility").innerHTML = data.scannerVolatility;
+
         // Trading Levels
         document.getElementById("entry").innerHTML = data.entry;
         document.getElementById("support").innerHTML = data.stopLoss;
