@@ -1,34 +1,75 @@
-try {
-  app.use("/api/market", marketRoutes);
-  console.log("✓ market");
-} catch (e) {
-  console.error("market failed", e);
-}
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
 
-try {
-  app.use("/api/ai", aiRoutes);
-  console.log("✓ ai");
-} catch (e) {
-  console.error("ai failed", e);
-}
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-try {
-  app.use("/api/news", newsRoutes);
-  console.log("✓ news");
-} catch (e) {
-  console.error("news failed", e);
-}
+// Routes
+const marketRoutes = require("./routes/market");
+const aiRoutes = require("./routes/ai");
+const newsRoutes = require("./routes/news");
+const authRoutes = require("./routes/auth");
+const calendarRoutes = require("./routes/calendar");
 
-try {
-  app.use("/api/auth", authRoutes);
-  console.log("✓ auth");
-} catch (e) {
-  console.error("auth failed", e);
-}
+// Middleware
+app.use(cors());
+app.use(express.json());
 
-try {
-  app.use("/api/calendar", calendarRoutes);
-  console.log("✓ calendar");
-} catch (e) {
-  console.error("calendar failed", e);
-}
+// API Routes
+app.use("/api/market", marketRoutes);
+app.use("/api/ai", aiRoutes);
+app.use("/api/news", newsRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/calendar", calendarRoutes);
+
+// Home
+app.get("/", (req, res) => {
+  res.json({
+    app: "ODERINDE GOLD INTELLIGENCE",
+    version: "3.1.0",
+    status: "ONLINE",
+    developer: "Oderinde Gold Intelligence Team"
+  });
+});
+
+// Status
+app.get("/api/status", (req, res) => {
+  res.json({
+    success: true,
+    status: "Server Running",
+    time: new Date().toISOString(),
+    uptime: process.uptime()
+  });
+});
+
+// 404
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: "Route not found"
+  });
+});
+
+// Error Handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+
+  res.status(500).json({
+    success: false,
+    message: "Internal Server Error"
+  });
+});
+
+// Start Server
+app.listen(PORT, () => {
+  console.log(`
+====================================
+ ODERINDE GOLD INTELLIGENCE
+====================================
+ Server running on port ${PORT}
+ Environment: ${process.env.NODE_ENV || "development"}
+ API: http://localhost:${PORT}
+====================================
+`);
+});
