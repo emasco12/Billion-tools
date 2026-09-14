@@ -12,14 +12,7 @@ async function getMarketData() {
       `https://api.twelvedata.com/quote?symbol=EUR/USD,GBP/USD,USD/JPY,XAU/USD,XAG/USD,WTI/USD&apikey=${process.env.TWELVE_DATA_API_KEY}`
     );
 
-    const btc = await axios.get(
-      "https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT"
-    );
-
-    const eth = await axios.get(
-      "https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT"
-    );
-
+    
     const quotes = twelve.data;
 
     const data = {
