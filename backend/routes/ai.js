@@ -1,5 +1,4 @@
 const express = require("express");
-
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -15,39 +14,41 @@ router.get("/", (req, res) => {
       entry: "3588.40",
       stopLoss: "3579.20",
       takeProfit: "3615.00",
-      riskReward: "1 : 3"
+      riskReward: "1 : 3",
+
+      trend: "Bullish",
+      bos: "Bullish BOS",
+      choch: "Not Detected",
+      orderBlock: "Demand Zone",
+      fvg: "Bullish FVG",
+      liquidity: "Buy-side Liquidity"
     },
 
     {
       pair: "EUR/USD",
       action: "SELL",
-      confidence: 92,
+      confidence: 91,
       recommendation: "SELL",
-      comment: "Bearish momentum detected.",
+      comment: "Bearish structure confirmed.",
       entry: "1.1742",
-      stopLoss: "1.1775",
-      takeProfit: "1.1660",
-      riskReward: "1 : 2.5"
-    },
+      stopLoss: "1.1770",
+      takeProfit: "1.1665",
+      riskReward: "1 : 2.5",
 
-    {
-      pair: "BTC/USD",
-      action: "WAIT",
-      confidence: 63,
-      recommendation: "WAIT",
-      comment: "Market is ranging. Wait for confirmation.",
-      entry: "-",
-      stopLoss: "-",
-      takeProfit: "-",
-      riskReward: "-"
+      trend: "Bearish",
+      bos: "Bearish BOS",
+      choch: "Bearish CHoCH",
+      orderBlock: "Supply Zone",
+      fvg: "Bearish FVG",
+      liquidity: "Sell-side Liquidity"
     }
 
   ];
 
-  const randomSignal =
+  const signal =
     signals[Math.floor(Math.random() * signals.length)];
 
-  res.json(randomSignal);
+  res.json(signal);
 
 });
 
