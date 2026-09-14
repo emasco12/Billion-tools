@@ -1,18 +1,19 @@
-const express = require("express");
-const router = express.Router();
-
-const { getMarketData } = require("../services/marketService");
-
 router.get("/", async (req, res) => {
-  try {
-    const data = await getMarketData();
-    res.json(data);
-  } catch (err) {
-    res.status(500).json({
-      success: false,
-      message: err.message
-    });
-  }
-});
+    try {
+        const market = await getMarketData();
+        const gold = market.gold;
 
-module.exports = router;
+        res.json({
+            price: gold.close || gold.price,
+            change: gold.percent_change || "0%",
+            updated: new Date().toLocaleTimeString()
+        });
+
+    } catch (err) {
+        res.status(500).json({
+            price: "--",
+            change: "--",
+            updated: "--"
+        });
+    }
+});
