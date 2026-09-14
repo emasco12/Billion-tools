@@ -1,3 +1,4 @@
+import TradingChart from "./components/TradingChart";
 import { useEffect, useState } from "react";
 import "./styles/global.css";
 
