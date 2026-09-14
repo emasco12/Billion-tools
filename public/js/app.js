@@ -1,64 +1,63 @@
 const API = "/api";
 
+// ================= MARKET =================
+
 async function loadPrice() {
     try {
         const res = await fetch(`${API}/market`);
         const data = await res.json();
 
-        document.getElementById("price").textContent = data.price;
-        document.getElementById("change").textContent = data.change;
-        document.getElementById("updated").textContent =
+        document.getElementById("goldPrice").textContent = data.price;
+        document.getElementById("goldChange").textContent = data.change;
+        document.getElementById("goldUpdated").textContent =
             "Updated " + data.updated;
 
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
 }
 
+// ================= AI =================
+
 async function loadAI() {
-
     try {
-
         const res = await fetch(`${API}/ai`);
         const data = await res.json();
 
-        document.getElementById("signal").textContent = data.recommendation;
-        document.getElementById("confidence").textContent = data.confidence;
-        document.getElementById("analysis").textContent = data.comment;
+        document.getElementById("signal").textContent =
+            data.recommendation || "WAIT";
 
-        document.getElementById("trend").textContent = data.trend;
-        document.getElementById("marketBias").textContent = data.marketBias;
-        document.getElementById("trendStrength").textContent = data.trendStrength;
-        document.getElementById("riskLevel").textContent = data.riskLevel;
-        document.getElementById("marketSession").textContent = data.marketSession;
-        document.getElementById("riskReward").textContent = data.riskReward;
+        document.getElementById("confidence").textContent =
+            data.confidence || "--";
 
-        document.getElementById("breakoutStatus").textContent = data.breakoutStatus;
-        document.getElementById("momentumStatus").textContent = data.momentumStatus;
-        document.getElementById("scannerTrend").textContent = data.scannerTrend;
-        document.getElementById("scannerVolatility").textContent = data.scannerVolatility;
+        document.getElementById("analysis").textContent =
+            data.comment || "No analysis";
 
-        document.getElementById("strengthScore").textContent =
-            data.strengthScore + "/100";
+        document.getElementById("trend").textContent =
+            data.trend || "--";
 
-        document.getElementById("buyProbability").textContent =
-            data.buyProbability;
+        document.getElementById("entry").textContent =
+            data.entry || "--";
 
-        document.getElementById("sellProbability").textContent =
-            data.sellProbability;
+        document.getElementById("support").textContent =
+            data.stopLoss || "--";
 
-        document.getElementById("overallSignal").textContent =
-            data.overallSignal;
+        document.getElementById("resistance").textContent =
+            data.takeProfit || "--";
 
-        document.getElementById("entry").textContent = data.entry;
-        document.getElementById("support").textContent = data.stopLoss;
-        document.getElementById("resistance").textContent = data.takeProfit;
+        if (document.getElementById("volatility")) {
+            document.getElementById("volatility").textContent =
+                data.volatility || "--";
+        }
 
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
+}
 
-}async function loadSentiment() {
+// ================= SENTIMENT =================
+
+async function loadSentiment() {
     try {
         const res = await fetch(`${API}/sentiment`);
         const data = await res.json();
@@ -67,18 +66,18 @@ async function loadAI() {
             `${data.sentiment} (${data.score}%)`;
 
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
 }
+
+// ================= NEWS =================
 
 async function loadNews() {
     try {
         const res = await fetch(`${API}/news`);
         const news = await res.json();
 
-        const container = document.getElementById("news");
-
-        if (!container) return;
+        const container = document.getElementById("newsList");
 
         container.innerHTML = "";
 
@@ -92,18 +91,18 @@ async function loadNews() {
         });
 
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
 }
+
+// ================= CALENDAR =================
 
 async function loadCalendar() {
     try {
         const res = await fetch(`${API}/calendar`);
         const events = await res.json();
 
-        const container = document.getElementById("calendar");
-
-        if (!container) return;
+        const container = document.getElementById("calendarList");
 
         container.innerHTML = "";
 
@@ -118,9 +117,14 @@ async function loadCalendar() {
         });
 
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
-}async function askAI() {
+}
+
+// ================= AI CHAT =================
+
+async function askAI() {
+
     const question = document.getElementById("aiQuestion").value.trim();
 
     if (!question) return;
@@ -129,14 +133,13 @@ async function loadCalendar() {
     responseBox.innerHTML = "Thinking...";
 
     try {
+
         const res = await fetch(`${API}/assistant`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                question: question
-            })
+            body: JSON.stringify({ question })
         });
 
         const data = await res.json();
@@ -144,8 +147,8 @@ async function loadCalendar() {
         responseBox.innerHTML = data.answer || "No response.";
 
     } catch (err) {
-        responseBox.innerHTML = "Unable to contact AI assistant.";
-        console.log(err);
+        responseBox.innerHTML = "Unable to contact AI.";
+        console.error(err);
     }
 }
 
@@ -154,6 +157,8 @@ const askButton = document.getElementById("askAI");
 if (askButton) {
     askButton.addEventListener("click", askAI);
 }
+
+// ================= LOAD DASHBOARD =================
 
 async function loadDashboard() {
     await Promise.all([
