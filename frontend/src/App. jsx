@@ -8,6 +8,7 @@ import DashboardCards from "./components/DashboardCards";
 import MarketScanner from "./components/MarketScanner";
 import TradingChart from "./components/TradingChart";
 import SignalCard from "./components/SignalCard";
+import MarketSentiment from "./components/MarketSentiment";
 import RiskCalculator from "./components/RiskCalculator";
 import AIPanel from "./components/AIPanel";
 import Watchlist from "./components/Watchlist";
@@ -61,6 +62,8 @@ export default function App() {
 
         <div className="bottom">
           <SignalCard ai={ai} />
+
+          <MarketSentiment ai={ai} />
 
           <SmartMoney ai={ai} />
 
