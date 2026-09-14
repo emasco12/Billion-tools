@@ -1,28 +1,28 @@
+const axios = require("axios");
+const NodeCache = require("node-cache");
+
+const cache = new NodeCache({
+  stdTTL: 10,
+});
+
 async function getMarketData() {
-  return {
-    forex: [
-      { symbol: "EUR/USD", price: 1.1742, change: "+0.18%" },
-      { symbol: "GBP/USD", price: 1.3615, change: "-0.11%" },
-      { symbol: "USD/JPY", price: 147.83, change: "+0.34%" }
-    ],
+  const cached = cache.get("market");
 
-    crypto: [
-      { symbol: "BTC/USD", price: 118450, change: "+2.11%" },
-      { symbol: "ETH/USD", price: 4650, change: "+1.42%" }
-    ],
+  if (cached) {
+    return cached;
+  }
 
-    commodities: [
-      { symbol: "XAU/USD", price: 3588.40, change: "+0.52%" },
-      { symbol: "XAG/USD", price: 39.12, change: "-0.28%" },
-      { symbol: "WTI Oil", price: 72.84, change: "+1.06%" }
-    ],
-
-    indices: [
-      { symbol: "US30", price: 45530, change: "+0.43%" },
-      { symbol: "NASDAQ", price: 23680, change: "+0.66%" },
-      { symbol: "S&P 500", price: 7124, change: "+0.29%" }
-    ]
+  const data = {
+    forex: [],
+    crypto: [],
+    commodities: []
   };
+
+  cache.set("market", data);
+
+  return data;
 }
 
-module.exports = { getMarketData };
+module.exports = {
+  getMarketData,
+};
