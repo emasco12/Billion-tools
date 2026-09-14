@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 require("dotenv").config();
 
 const app = express();
@@ -16,6 +17,9 @@ const calendarRoutes = require("./routes/calendar");
 app.use(cors());
 app.use(express.json());
 
+// Serve Frontend
+app.use(express.static(path.join(__dirname, "public")));
+
 // API Routes
 app.use("/api/market", marketRoutes);
 app.use("/api/ai", aiRoutes);
@@ -23,14 +27,9 @@ app.use("/api/news", newsRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/calendar", calendarRoutes);
 
-// Home Route
+// Home Page
 app.get("/", (req, res) => {
-  res.json({
-    app: "ODERINDE GOLD INTELLIGENCE",
-    version: "3.1.0",
-    status: "ONLINE",
-    developer: "Oderinde Gold Intelligence Team"
-  });
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 // Status Route
