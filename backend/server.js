@@ -28,6 +28,7 @@ app.use("/api/news", newsRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/calendar", calendarRoutes);
 app.use("/api/sentiment", sentimentRoutes);
+app.use("/assistant", require("./routes/assistant"));
 
 // Home Page
 app.get("/", (req, res) => {
