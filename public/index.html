@@ -152,7 +152,7 @@ Waiting for live data...
 
 <div class="card ai-card">
 
-<h3>🤖 AI Gold Intelligence</h3>
+<h3>🧠 AI Trade Signal</h3>
 
 <div class="signal">
 <span id="signal">WAIT</span>
@@ -167,9 +167,7 @@ Confidence
 </p>
 
 <p id="analysis">
-
-Loading AI...
-
+Waiting for market confirmation...
 </p>
 
 </div>
@@ -298,9 +296,53 @@ Loading AI...
 
     </div>
 
-    <!-- AI Gold Assistant -->
+    <<!-- Trade Summary -->
 
-    <div class="card assistant">
+<div class="card trade-summary">
+
+    <h3>📋 Trade Summary</h3>
+
+    <div class="analysis-row">
+        <span>Signal</span>
+        <strong id="tradeSignal">WAIT</strong>
+    </div>
+
+    <div class="analysis-row">
+        <span>Confidence</span>
+        <strong id="tradeConfidence">--%</strong>
+    </div>
+
+    <div class="analysis-row">
+        <span>Market Bias</span>
+        <strong id="tradeBias">Neutral</strong>
+    </div>
+
+    <div class="analysis-row">
+        <span>Entry</span>
+        <strong id="tradeEntry">--</strong>
+    </div>
+
+    <div class="analysis-row">
+        <span>Stop Loss</span>
+        <strong id="tradeSL">--</strong>
+    </div>
+
+    <div class="analysis-row">
+        <span>Take Profit</span>
+        <strong id="tradeTP">--</strong>
+    </div>
+
+    <div class="analysis-row">
+        <span>Risk : Reward</span>
+        <strong id="tradeRR">1 : --</strong>
+    </div>
+
+    <div class="analysis-row">
+        <span>Trade Duration</span>
+        <strong id="tradeTime">2–6 Hours</strong>
+    </div>
+
+</div>
 
         <h3>🤖 AI Gold Assistant</h3>
 
@@ -327,6 +369,7 @@ Loading AI...
 
 </div>
 
+<script src="js/calculators.js"></script>
 <script src="js/app.js"></script>
 
 </body>
