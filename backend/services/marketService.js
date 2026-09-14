@@ -1,28 +1,19 @@
 const axios = require("axios");
 const NodeCache = require("node-cache");
 
-const cache = new NodeCache({
-  stdTTL: 10,
-});
+const cache = new NodeCache({ stdTTL: 10 });
 
 async function getMarketData() {
   const cached = cache.get("market");
+  if (cached) return cached;
 
-  if (cached) {
-    return cached;
-  }
+  // ... your existing market service code here ...
 
-  const data = {
+  return {
     forex: [],
-    crypto: [],
-    commodities: []
+    commodities: [],
+    crypto: []
   };
-
-  cache.set("market", data);
-
-  return data;
 }
 
-module.exports = {
-  getMarketData,
-};
+module.exports = { getMarketData };
