@@ -5,7 +5,6 @@ router.get("/", async (req, res) => {
   let currentPrice = 3588.40;
 
   try {
-
     const market = await fetch("https://billion-tools.onrender.com/api/market");
     const marketData = await market.json();
 
@@ -21,18 +20,35 @@ router.get("/", async (req, res) => {
   }
 
   let signal;
-let trend;
+  let trend;
+  let entry;
+  let stopLoss;
+  let takeProfit;
 
-if (currentPrice >= 3600) {
-  signal = "BUY";
-  trend = "Bullish";
-} else if (currentPrice <= 3550) {
-  signal = "SELL";
-  trend = "Bearish";
-} else {
-  signal = "WAIT";
-  trend = "Sideways";
-}
+  if (currentPrice >= 3600) {
+    signal = "BUY";
+    trend = "Bullish";
+
+    entry = currentPrice;
+    stopLoss = currentPrice - 12;
+    takeProfit = currentPrice + 36;
+
+  } else if (currentPrice <= 3550) {
+    signal = "SELL";
+    trend = "Bearish";
+
+    entry = currentPrice;
+    stopLoss = currentPrice + 12;
+    takeProfit = currentPrice - 36;
+
+  } else {
+    signal = "WAIT";
+    trend = "Sideways";
+
+    entry = currentPrice;
+    stopLoss = currentPrice - 8;
+    takeProfit = currentPrice + 8;
+  }
 
   let confidence;
 
@@ -44,41 +60,26 @@ if (currentPrice >= 3600) {
     confidence = Math.floor(Math.random() * 21) + 40;
   }
 
-  const entry = currentPrice.toFixed(2);
-  const stopLoss = (currentPrice - 10).toFixed(2);
-  const takeProfit = (currentPrice + 30).toFixed(2);
-
   res.json({
-
     recommendation: signal,
-
     confidence: confidence + "%",
-
-    entry,
-
-    stopLoss,
-
-    takeProfit,
-
+    entry: entry.toFixed(2),
+    stopLoss: stopLoss.toFixed(2),
+    takeProfit: takeProfit.toFixed(2),
     riskReward: "1:3",
-
-    trend:
-      trend,
-
+    trend,
     smartMoney:
       signal === "BUY"
         ? "Institutions accumulating positions."
         : signal === "SELL"
         ? "Institutions distributing positions."
         : "Waiting for confirmation.",
-
     comment:
       signal === "BUY"
         ? "AI detects a buying opportunity."
         : signal === "SELL"
         ? "AI detects a selling opportunity."
         : "Wait for confirmation."
-
   });
 
 });
