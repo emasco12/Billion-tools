@@ -20,8 +20,19 @@ router.get("/", async (req, res) => {
     console.log(e);
   }
 
-  const signals = ["BUY", "SELL", "WAIT"];
-  const signal = signals[Math.floor(Math.random() * signals.length)];
+  let signal;
+let trend;
+
+if (currentPrice >= 3600) {
+  signal = "BUY";
+  trend = "Bullish";
+} else if (currentPrice <= 3550) {
+  signal = "SELL";
+  trend = "Bearish";
+} else {
+  signal = "WAIT";
+  trend = "Sideways";
+}
 
   let confidence;
 
@@ -52,11 +63,7 @@ router.get("/", async (req, res) => {
     riskReward: "1:3",
 
     trend:
-      signal === "BUY"
-        ? "Bullish"
-        : signal === "SELL"
-        ? "Bearish"
-        : "Sideways",
+      trend,
 
     smartMoney:
       signal === "BUY"
