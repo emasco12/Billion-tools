@@ -31,7 +31,7 @@ async function getMarketData() {
       commodities: [
         quotes["XAU/USD"],
         quotes["XAG/USD"],
-        quotes["WTI/USD"]
+        
       ],
       crypto: [
         { symbol: "BTC/USDT", price: btc.data.price },
