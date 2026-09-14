@@ -1,105 +1,55 @@
 import { useState } from "react";
+import { register } from "../services/api";
 
 export default function Register() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: ""
-  });
-
-  const [message, setMessage] = useState("");
-
-  function handleChange(e) {
-
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    });
-
-  }
-
-  async function register(e) {
-
+  async function handleRegister(e) {
     e.preventDefault();
 
-    try {
+    const res = await register({
+      name,
+      email,
+      password
+    });
 
-      const res = await fetch("/api/auth/register", {
-
-        method: "POST",
-
-        headers: {
-          "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify(form)
-
-      });
-
-      const data = await res.json();
-
-      setMessage(data.message);
-
-    } catch (err) {
-
-      setMessage("Unable to connect to server.");
-
-    }
-
+    alert(res.message);
   }
 
   return (
-
-    <div className="panel">
-
+    <form onSubmit={handleRegister} className="panel">
       <h2>Create Account</h2>
 
-      <form onSubmit={register}>
+      <input
+        type="text"
+        placeholder="Full Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
 
-        <input
-          name="name"
-          placeholder="Full Name"
-          value={form.name}
-          onChange={handleChange}
-        />
+      <br /><br />
 
-        <br /><br />
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
 
-        <input
-          name="email"
-          type="email"
-          placeholder="Email Address"
-          value={form.email}
-          onChange={handleChange}
-        />
+      <br /><br />
 
-        <br /><br />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
 
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-        />
+      <br /><br />
 
-        <br /><br />
-
-        <button type="submit">
-
-          Create Account
-
-        </button>
-
-      </form>
-
-      <br />
-
-      <p>{message}</p>
-
-    </div>
-
+      <button type="submit">Register</button>
+    </form>
   );
-
 }
