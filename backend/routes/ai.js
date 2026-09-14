@@ -1,37 +1,34 @@
-const express = require("express");
-const router = express.Router();
+const router = require("express").Router();
 
 router.get("/", (req, res) => {
-
-  const signals = ["BUY", "SELL", "HOLD"];
-
-  const signal =
-    signals[Math.floor(Math.random() * signals.length)];
-
-  let comment = "";
-  let confidence = 0;
-
-  if (signal === "BUY") {
-    comment = "Bullish momentum detected.";
-    confidence = 86;
-  } else if (signal === "SELL") {
-    comment = "Bearish pressure increasing.";
-    confidence = 82;
-  } else {
-    comment = "Market is ranging. Wait for confirmation.";
-    confidence = 74;
-  }
+  const signals = ["BUY", "SELL", "WAIT"];
+  const signal = signals[Math.floor(Math.random() * signals.length)];
 
   res.json({
     recommendation: signal,
-    confidence,
-    comment,
-    entry: "3528.40",
-    stopLoss: "3518.40",
-    takeProfit: "3558.40",
-    riskReward: "1 : 3"
+    confidence: Math.floor(Math.random() * 15) + 85 + "%",
+    entry: "3588.40",
+    stopLoss: "3578.40",
+    takeProfit: "3618.40",
+    riskReward: "1:3",
+    trend: signal === "BUY"
+      ? "Bullish"
+      : signal === "SELL"
+      ? "Bearish"
+      : "Sideways",
+    smartMoney:
+      signal === "BUY"
+        ? "Institutions accumulating positions."
+        : signal === "SELL"
+        ? "Institutions distributing positions."
+        : "Waiting for market confirmation.",
+    comment:
+      signal === "BUY"
+        ? "AI detects a high-probability buying opportunity."
+        : signal === "SELL"
+        ? "AI detects a potential selling opportunity."
+        : "No high-quality setup. Wait for confirmation."
   });
-
 });
 
 module.exports = router;
