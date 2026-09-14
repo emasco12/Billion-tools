@@ -1,79 +1,45 @@
 import { useState } from "react";
+import { login } from "../services/api";
 
 export default function Login() {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
 
-  async function login(e) {
+  async function handleLogin(e) {
     e.preventDefault();
 
-    try {
+    const res = await login({ email, password });
 
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          email,
-          password
-        })
-      });
+    alert(res.message);
 
-      const data = await res.json();
-
-      setMessage(data.message || "Login successful");
-
-      console.log(data);
-
-    } catch (err) {
-
-      setMessage("Unable to connect to server.");
-
+    if (res.success) {
+      console.log(res.user);
     }
-
   }
 
   return (
-
-    <div className="panel">
-
+    <form onSubmit={handleLogin} className="panel">
       <h2>Login</h2>
 
-      <form onSubmit={login}>
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
 
-        <input
-          type="email"
-          placeholder="Email Address"
-          value={email}
-          onChange={(e)=>setEmail(e.target.value)}
-        />
+      <br /><br />
 
-        <br /><br />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e)=>setPassword(e.target.value)}
-        />
+      <br /><br />
 
-        <br /><br />
-
-        <button type="submit">
-          Login
-        </button>
-
-      </form>
-
-      <br />
-
-      <p>{message}</p>
-
-    </div>
-
+      <button type="submit">Login</button>
+    </form>
   );
-
 }
