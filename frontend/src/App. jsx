@@ -14,6 +14,7 @@ import Watchlist from "./components/Watchlist";
 import NewsPanel from "./components/NewsPanel";
 import SmartMoney from "./components/SmartMoney";
 import EconomicCalendar from "./components/EconomicCalendar";
+import TradingJournal from "./components/TradingJournal";
 
 export default function App() {
   const [market, setMarket] = useState(null);
@@ -76,6 +77,10 @@ export default function App() {
         <br />
 
         <EconomicCalendar />
+
+        <br />
+
+        <TradingJournal />
       </main>
     </div>
   );
