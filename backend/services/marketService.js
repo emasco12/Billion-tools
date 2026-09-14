@@ -9,25 +9,30 @@ async function getMarketData() {
 
   try {
     const response = await axios.get(
-      `https://api.twelvedata.com/quote?symbol=XAU/USD&apikey=${process.env.TWELVE_DATA_API_KEY}`
+      "https://www.goldapi.io/api/XAU/USD",
+      {
+        headers: {
+          "x-access-token": process.env.GOLD_API_KEY,
+          "Content-Type": "application/json"
+        }
+      }
     );
 
-    const gold = response.data;
-
     const data = {
-      price: gold.close || gold.price,
-      change: gold.percent_change || "0%"
+      price: response.data.price,
+      change: response.data.chp + "%"
     };
 
     cache.set("gold", data);
 
     return data;
+
   } catch (err) {
-    console.error(err.message);
+    console.error(err.response?.data || err.message);
 
     return {
       price: "--",
-      change: "0%"
+      change: "--"
     };
   }
 }
