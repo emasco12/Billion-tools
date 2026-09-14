@@ -12,6 +12,7 @@ const aiRoutes = require("./routes/ai");
 const newsRoutes = require("./routes/news");
 const authRoutes = require("./routes/auth");
 const calendarRoutes = require("./routes/calendar");
+const sentimentRoutes = require("./routes/sentiment");
 
 // Middleware
 app.use(cors());
@@ -26,6 +27,7 @@ app.use("/api/ai", aiRoutes);
 app.use("/api/news", newsRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/calendar", calendarRoutes);
+app.use("/api/sentiment", sentimentRoutes);
 
 // Home Page
 app.get("/", (req, res) => {
