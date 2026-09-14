@@ -1,319 +1,171 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>ODERINDE GOLD INTELLIGENCE</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="css/style.css">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-</head>
-
-<body>
-
-<div class="app">
-
-<!-- ================= SIDEBAR ================= -->
-
-<aside class="sidebar">
-
-<div class="logo">
-
-<div class="logo-icon">
-<i class="fas fa-coins"></i>
-</div>
-
-<div>
-<h2>ODERINDE</h2>
-<span>Gold Intelligence</span>
-</div>
-
-</div>
-
-<nav>
-
-<a class="active">
-<i class="fas fa-house"></i>
-<span>Dashboard</span>
-</a>
-
-<a>
-<i class="fas fa-chart-line"></i>
-<span>Gold Intelligence</span>
-</a>
-
-<a>
-<i class="fas fa-chart-area"></i>
-<span>Gold Analysis</span>
-</a>
-
-<a>
-<i class="fas fa-magnifying-glass-chart"></i>
-<span>Gold Scanner</span>
-</a>
-
-<a>
-<i class="fas fa-bullseye"></i>
-<span>Gold Zones</span>
-</a>
-
-<a>
-<i class="fas fa-newspaper"></i>
-<span>Gold News</span>
-</a>
-
-<a>
-<i class="fas fa-calendar-days"></i>
-<span>Economic Calendar</span>
-</a>
-
-<a>
-<i class="fas fa-calculator"></i>
-<span>Gold Tools</span>
-</a>
-
-<a>
-<i class="fas fa-robot"></i>
-<span>AI Assistant</span>
-</a>
-
-<a>
-<i class="fas fa-gear"></i>
-<span>Settings</span>
-</a>
-
-</nav>
-
-</aside>
-
-<!-- ================= MAIN ================= -->
-
-<main class="main">
-
-<header class="topbar">
-
-<div>
-
-<h1>ODERINDE GOLD INTELLIGENCE</h1>
-
-<p>Professional Gold Intelligence Platform</p>
-
-</div>
-
-<div class="actions">
-
-<button>
-<i class="fas fa-bell"></i>
-</button>
-
-<button>
-<i class="fas fa-user"></i>
-</button>
-
-</div>
-
-</header>
-
-<section class="dashboard">
-
-<!-- ================= Row 1 ================= -->
-
-<div class="grid">
-
-<div class="card gold-card">
-
-<h3>
-<i class="fas fa-coins"></i>
-Live Gold Price
-</h3>
-
-<h1 id="goldPrice">Loading...</h1>
-
-<p id="goldChange">Connecting...</p>
-
-<small id="goldUpdated">
-Waiting for live data...
-</small>
-
-</div>
-
-<div class="card ai-card">
-
-<h3>🤖 AI Gold Intelligence</h3>
-
-<div class="signal">
-<span id="signal">WAIT</span>
-</div>
-
-<p>
-
-Confidence
-
-<strong id="confidence">--</strong>
-
-</p>
-
-<p id="analysis">
-
-Loading AI...
-
-</p>
-
-</div>
-
-</div><!-- ================= Row 2 ================= -->
-
-<div class="grid">
-
-    <div class="card">
-
-        <h3>📊 Market Sentiment</h3>
-
-        <h2 id="sentiment">Loading...</h2>
-
-    </div>
-
-    <div class="card">
-
-        <h3>📈 Trend</h3>
-
-        <h2 id="trend">Loading...</h2>
-
-    </div>
-
-    <div class="card">
-
-        <h3>⚡ Volatility</h3>
-
-        <h2 id="volatility">Loading...</h2>
-
-    </div>
-
-</div>
-
-<!-- ================= Row 3 ================= -->
-
-<div class="grid">
-
-    <div class="card">
-
-        <h3>🎯 Support</h3>
-
-        <h2 id="support">--</h2>
-
-    </div>
-
-    <div class="card">
-
-        <h3>🚀 Resistance</h3>
-
-        <h2 id="resistance">--</h2>
-
-    </div>
-
-    <div class="card">
-
-        <h3>💰 Entry Zone</h3>
-
-        <h2 id="entry">--</h2>
-
-    </div>
-
-</div>
-
-<!-- ================= Row 4 ================= -->
-
-<div class="grid">
-
-    <div class="card news">
-
-        <h3>📰 Gold News</h3>
-
-        <div id="newsList">
-
-            Loading...
-
-        </div>
-
-    </div>
-
-    <div class="card calendar">
-
-        <h3>📅 Economic Calendar</h3>
-
-        <div id="calendarList">
-
-            Loading...
-
-        </div>
-
-    </div>
-
-</div>// ================= Gold Tools =================
-
-function riskCalculator() {
-
-    let balance = prompt("Account Balance ($)");
-    let risk = prompt("Risk (%)");
-
-    if (!balance || !risk) return;
-
-    let amount = (Number(balance) * Number(risk)) / 100;
-
-    document.getElementById("toolResult").innerHTML =
-        `<b>Maximum Risk:</b> $${amount.toFixed(2)}`;
+const API = "";
+
+async function loadPrice() {
+    try {
+        const res = await fetch(`${API}/market`);
+        const data = await res.json();
+
+        document.getElementById("price").textContent = data.price;
+        document.getElementById("change").textContent = data.change;
+        document.getElementById("updated").textContent =
+            "Updated " + data.updated;
+
+    } catch (err) {
+        console.log(err);
+    }
 }
 
-function positionCalculator() {
+async function loadAI() {
 
-    let balance = prompt("Account Balance ($)");
-    let risk = prompt("Risk (%)");
-    let stopLoss = prompt("Stop Loss (pips)");
+    try {
 
-    if (!balance || !risk || !stopLoss) return;
+        const res = await fetch(`${API}/ai`);
+        const data = await res.json();
 
-    let riskMoney = (Number(balance) * Number(risk)) / 100;
-    let lot = riskMoney / (Number(stopLoss) * 10);
+        document.getElementById("signal").textContent = data.recommendation;
+        document.getElementById("confidence").textContent = data.confidence;
+        document.getElementById("analysis").textContent = data.comment;
 
-    document.getElementById("toolResult").innerHTML =
-        `<b>Suggested Lot Size:</b> ${lot.toFixed(2)} Lots`;
+        document.getElementById("trend").textContent = data.trend;
+        document.getElementById("marketBias").textContent = data.marketBias;
+        document.getElementById("trendStrength").textContent = data.trendStrength;
+        document.getElementById("riskLevel").textContent = data.riskLevel;
+        document.getElementById("marketSession").textContent = data.marketSession;
+        document.getElementById("riskReward").textContent = data.riskReward;
+
+        document.getElementById("breakoutStatus").textContent = data.breakoutStatus;
+        document.getElementById("momentumStatus").textContent = data.momentumStatus;
+        document.getElementById("scannerTrend").textContent = data.scannerTrend;
+        document.getElementById("scannerVolatility").textContent = data.scannerVolatility;
+
+        document.getElementById("strengthScore").textContent =
+            data.strengthScore + "/100";
+
+        document.getElementById("buyProbability").textContent =
+            data.buyProbability;
+
+        document.getElementById("sellProbability").textContent =
+            data.sellProbability;
+
+        document.getElementById("overallSignal").textContent =
+            data.overallSignal;
+
+        document.getElementById("entry").textContent = data.entry;
+        document.getElementById("support").textContent = data.stopLoss;
+        document.getElementById("resistance").textContent = data.takeProfit;
+
+    } catch (err) {
+        console.log(err);
+    }
+
+}async function loadSentiment() {
+    try {
+        const res = await fetch(`${API}/sentiment`);
+        const data = await res.json();
+
+        document.getElementById("sentiment").textContent =
+            `${data.sentiment} (${data.score}%)`;
+
+    } catch (err) {
+        console.log(err);
+    }
 }
 
-function profitCalculator() {
+async function loadNews() {
+    try {
+        const res = await fetch(`${API}/news`);
+        const news = await res.json();
 
-    let lots = prompt("Lot Size");
-    let pips = prompt("Profit Target (pips)");
+        const container = document.getElementById("news");
 
-    if (!lots || !pips) return;
+        if (!container) return;
 
-    let profit = Number(lots) * Number(pips) * 10;
+        container.innerHTML = "";
 
-    document.getElementById("toolResult").innerHTML =
-        `<b>Estimated Profit:</b> $${profit.toFixed(2)}`;
+        news.forEach(item => {
+            container.innerHTML += `
+                <div class="news-card">
+                    <h4>${item.title}</h4>
+                    <small>${item.source}</small>
+                </div>
+            `;
+        });
+
+    } catch (err) {
+        console.log(err);
+    }
 }
 
-function pipCalculator() {
+async function loadCalendar() {
+    try {
+        const res = await fetch(`${API}/calendar`);
+        const events = await res.json();
 
-    let entry = prompt("Entry Price");
-    let exit = prompt("Exit Price");
+        const container = document.getElementById("calendar");
 
-    if (!entry || !exit) return;
+        if (!container) return;
 
-    let pips = Math.abs(Number(exit) - Number(entry)) * 100;
+        container.innerHTML = "";
 
-    document.getElementById("toolResult").innerHTML =
-        `<b>Pip Movement:</b> ${pips.toFixed(1)} pips`;
+        events.forEach(event => {
+            container.innerHTML += `
+                <div class="calendar-card">
+                    <strong>${event.currency}</strong><br>
+                    ${event.event}<br>
+                    <small>${event.time}</small>
+                </div>
+            `;
+        });
+
+    } catch (err) {
+        console.log(err);
+    }
+}async function askAI() {
+    const question = document.getElementById("aiQuestion").value.trim();
+
+    if (!question) return;
+
+    const responseBox = document.getElementById("aiResponse");
+    responseBox.innerHTML = "Thinking...";
+
+    try {
+        const res = await fetch(`${API}/assistant`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                question: question
+            })
+        });
+
+        const data = await res.json();
+
+        responseBox.innerHTML = data.answer || "No response.";
+
+    } catch (err) {
+        responseBox.innerHTML = "Unable to contact AI assistant.";
+        console.log(err);
+    }
 }
+
+const askButton = document.getElementById("askAI");
+
+if (askButton) {
+    askButton.addEventListener("click", askAI);
+}
+
+async function loadDashboard() {
+    await Promise.all([
+        loadPrice(),
+        loadAI(),
+        loadSentiment(),
+        loadNews(),
+        loadCalendar()
+    ]);
+}
+
+loadDashboard();
+
+// Refresh every 30 seconds
+setInterval(loadDashboard, 30000);
