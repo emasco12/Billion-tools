@@ -7,10 +7,9 @@ async function loadMarket() {
     try {
 
         const res = await fetch(`${API}/market`);
-
         const data = await res.json();
 
-        if (data.forex && data.forex.length > 0) {
+        if (data.commodities && data.commodities.length > 0) {
 
             document.getElementById("goldPrice").innerHTML =
                 data.commodities[0].close || data.commodities[0].price;
@@ -24,9 +23,7 @@ async function loadMarket() {
         }
 
     } catch (e) {
-
         console.log(e);
-
     }
 
 }
@@ -36,29 +33,33 @@ async function loadMarket() {
 async function loadAI() {
 
     const res = await fetch(`${API}/ai`);
-
     const data = await res.json();
 
-    document.getElementById("signal").innerHTML =
-        data.recommendation;
+    document.getElementById("signal").innerHTML = data.recommendation;
+    document.getElementById("confidence").innerHTML = data.confidence;
+    document.getElementById("analysis").innerHTML = data.comment;
+    document.getElementById("trend").innerHTML = data.trend;
+    document.getElementById("entry").innerHTML = data.entry;
+    document.getElementById("support").innerHTML = data.stopLoss;
+    document.getElementById("resistance").innerHTML = data.takeProfit;
 
-    document.getElementById("confidence").innerHTML =
-        data.confidence;
+}
 
-    document.getElementById("analysis").innerHTML =
-        data.comment;
+// -------- Market Sentiment --------
 
-    document.getElementById("trend").innerHTML =
-        data.trend;
+async function loadSentiment() {
 
-    document.getElementById("entry").innerHTML =
-        data.entry;
+    try {
 
-    document.getElementById("support").innerHTML =
-        data.stopLoss;
+        const res = await fetch(`${API}/sentiment`);
+        const data = await res.json();
 
-    document.getElementById("resistance").innerHTML =
-        data.takeProfit;
+        document.getElementById("sentiment").innerHTML =
+            `${data.sentiment} (${data.score}%)`;
+
+    } catch (e) {
+        console.log(e);
+    }
 
 }
 
@@ -67,7 +68,6 @@ async function loadAI() {
 async function loadNews() {
 
     const res = await fetch(`${API}/news`);
-
     const news = await res.json();
 
     let html = "";
@@ -92,7 +92,6 @@ async function loadNews() {
 async function loadCalendar() {
 
     const res = await fetch(`${API}/calendar`);
-
     const events = await res.json();
 
     let html = "";
@@ -101,15 +100,10 @@ async function loadCalendar() {
 
         html += `
         <div class="calendar-item">
-
             <strong>${item.currency}</strong>
-
             ${item.event}
-
             <br>
-
             ${item.time}
-
         </div>
         `;
 
@@ -119,22 +113,18 @@ async function loadCalendar() {
 
 }
 
-// Initial Load
+// -------- Initial Load --------
 
 loadMarket();
-
 loadAI();
-
+loadSentiment();
 loadNews();
-
 loadCalendar();
 
-// Auto Refresh
+// -------- Auto Refresh --------
 
-setInterval(loadMarket,30000);
-
-setInterval(loadAI,30000);
-
-setInterval(loadNews,60000);
-
-setInterval(loadCalendar,60000);
+setInterval(loadMarket, 30000);
+setInterval(loadAI, 30000);
+setInterval(loadSentiment, 30000);
+setInterval(loadNews, 60000);
+setInterval(loadCalendar, 60000);
