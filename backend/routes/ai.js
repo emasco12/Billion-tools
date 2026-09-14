@@ -31,12 +31,14 @@ router.get("/", async (req, res) => {
     entry = currentPrice;
     stopLoss = currentPrice - 12;
     takeProfit = currentPrice + 36;
+
   } else if (currentPrice <= 3550) {
     signal = "SELL";
     trend = "Bearish";
     entry = currentPrice;
     stopLoss = currentPrice + 12;
     takeProfit = currentPrice - 36;
+
   } else {
     signal = "WAIT";
     trend = "Sideways";
@@ -112,6 +114,29 @@ router.get("/", async (req, res) => {
     scannerVolatility = "Low";
   }
 
+  // Gold Strength
+  let strengthScore;
+  let buyProbability;
+  let sellProbability;
+  let overallSignal;
+
+  if (signal === "BUY") {
+    strengthScore = 88;
+    buyProbability = "82%";
+    sellProbability = "18%";
+    overallSignal = "STRONG BUY";
+  } else if (signal === "SELL") {
+    strengthScore = 27;
+    buyProbability = "22%";
+    sellProbability = "78%";
+    overallSignal = "STRONG SELL";
+  } else {
+    strengthScore = 52;
+    buyProbability = "50%";
+    sellProbability = "50%";
+    overallSignal = "WAIT";
+  }
+
   res.json({
     recommendation: signal,
     confidence: confidence + "%",
@@ -130,6 +155,11 @@ router.get("/", async (req, res) => {
     momentumStatus,
     scannerTrend,
     scannerVolatility,
+
+    strengthScore,
+    buyProbability,
+    sellProbability,
+    overallSignal,
 
     smartMoney:
       signal === "BUY"
