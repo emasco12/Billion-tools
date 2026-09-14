@@ -28,23 +28,18 @@ router.get("/", async (req, res) => {
   if (currentPrice >= 3600) {
     signal = "BUY";
     trend = "Bullish";
-
     entry = currentPrice;
     stopLoss = currentPrice - 12;
     takeProfit = currentPrice + 36;
-
   } else if (currentPrice <= 3550) {
     signal = "SELL";
     trend = "Bearish";
-
     entry = currentPrice;
     stopLoss = currentPrice + 12;
     takeProfit = currentPrice - 36;
-
   } else {
     signal = "WAIT";
     trend = "Sideways";
-
     entry = currentPrice;
     stopLoss = currentPrice - 8;
     takeProfit = currentPrice + 8;
@@ -94,6 +89,29 @@ router.get("/", async (req, res) => {
     riskLevel = "High";
   }
 
+  // Gold Scanner
+  let breakoutStatus;
+  let momentumStatus;
+  let scannerTrend;
+  let scannerVolatility;
+
+  if (signal === "BUY") {
+    breakoutStatus = "Bullish Breakout";
+    momentumStatus = "Strong";
+    scannerTrend = "Uptrend";
+    scannerVolatility = "Normal";
+  } else if (signal === "SELL") {
+    breakoutStatus = "Bearish Breakdown";
+    momentumStatus = "Strong";
+    scannerTrend = "Downtrend";
+    scannerVolatility = "High";
+  } else {
+    breakoutStatus = "No Breakout";
+    momentumStatus = "Weak";
+    scannerTrend = "Sideways";
+    scannerVolatility = "Low";
+  }
+
   res.json({
     recommendation: signal,
     confidence: confidence + "%",
@@ -108,6 +126,11 @@ router.get("/", async (req, res) => {
     trendStrength,
     riskLevel,
 
+    breakoutStatus,
+    momentumStatus,
+    scannerTrend,
+    scannerVolatility,
+
     smartMoney:
       signal === "BUY"
         ? "Institutions accumulating positions."
@@ -119,7 +142,7 @@ router.get("/", async (req, res) => {
       signal === "BUY"
         ? "AI detects a buying opportunity."
         : signal === "SELL"
-        ? "AI detects a potential selling opportunity."
+        ? "AI detects a selling opportunity."
         : "Wait for confirmation."
 
   });
