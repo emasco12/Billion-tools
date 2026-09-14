@@ -262,112 +262,43 @@ Loading AI...
 
     </div>
 
-</div><!-- ================= Row 5 ================= -->
+</div><!-- ================= Row 6 ================= -->
 
 <div class="grid">
 
-    <!-- Gold Analysis -->
-
-    <div class="card analysis">
-
-        <h3>🟡 Gold Analysis</h3>
-
-        <div class="analysis-row">
-            <span>Market Bias</span>
-            <strong id="marketBias">Loading...</strong>
-        </div>
-
-        <div class="analysis-row">
-            <span>Trend Strength</span>
-            <strong id="trendStrength">Loading...</strong>
-        </div>
-
-        <div class="analysis-row">
-            <span>Risk Level</span>
-            <strong id="riskLevel">Loading...</strong>
-        </div>
-
-        <div class="analysis-row">
-            <span>Market Session</span>
-            <strong id="marketSession">Loading...</strong>
-        </div>
-
-        <div class="analysis-row">
-            <span>Risk Reward</span>
-            <strong id="riskReward">Loading...</strong>
-        </div>
-
-    </div>
-
-    <!-- Gold Scanner -->
-
-    <div class="card scanner">
-
-        <h3>📡 Gold Scanner</h3>
-
-        <div class="analysis-row">
-            <span>Breakout</span>
-            <strong id="breakoutStatus">Scanning...</strong>
-        </div>
-
-        <div class="analysis-row">
-            <span>Momentum</span>
-            <strong id="momentumStatus">Scanning...</strong>
-        </div>
-
-        <div class="analysis-row">
-            <span>Trend</span>
-            <strong id="scannerTrend">Scanning...</strong>
-        </div>
-
-        <div class="analysis-row">
-            <span>Volatility</span>
-            <strong id="scannerVolatility">Scanning...</strong>
-        </div>
-
-    </div>
-
-    <!-- Gold Strength -->
-
-    <div class="card strength">
-
-        <h3>🟢 Gold Strength</h3>
-
-        <h1 id="strengthScore">--</h1>
-
-        <div class="analysis-row">
-            <span>BUY Probability</span>
-            <strong id="buyProbability">--</strong>
-        </div>
-
-        <div class="analysis-row">
-            <span>SELL Probability</span>
-            <strong id="sellProbability">--</strong>
-        </div>
-
-        <div class="analysis-row">
-            <span>Overall Signal</span>
-            <strong id="overallSignal">--</strong>
-        </div>
-
-    </div>
-
-</div>
-
-<!-- ================= Row 6 ================= -->
-
-<div class="grid">
+    <!-- Gold Tools -->
 
     <div class="card tools">
 
         <h3>🧮 Gold Tools</h3>
 
-        <button class="tool-btn">Risk Calculator</button>
-        <button class="tool-btn">Position Size</button>
-        <button class="tool-btn">Profit Calculator</button>
-        <button class="tool-btn">Pip Calculator</button>
+        <div class="tool-grid">
+
+            <button class="tool-btn" onclick="riskCalculator()">
+                Risk Calculator
+            </button>
+
+            <button class="tool-btn" onclick="positionCalculator()">
+                Position Size
+            </button>
+
+            <button class="tool-btn" onclick="profitCalculator()">
+                Profit Calculator
+            </button>
+
+            <button class="tool-btn" onclick="pipCalculator()">
+                Pip Calculator
+            </button>
+
+        </div>
+
+        <div id="toolResult" class="tool-result">
+            Select a calculator...
+        </div>
 
     </div>
+
+    <!-- AI Gold Assistant -->
 
     <div class="card assistant">
 
