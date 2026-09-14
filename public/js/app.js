@@ -1,4 +1,4 @@
-const API = "";
+const API = "/api";
 
 async function loadPrice() {
     try {
