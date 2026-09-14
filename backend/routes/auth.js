@@ -1,67 +1,56 @@
 const express = require("express");
-
 const router = express.Router();
 
-// Register
-router.post("/register", async (req, res) => {
+const { users } = require("../models/User");
 
-    const { name, email, password } = req.body;
+router.post("/register", (req, res) => {
+  const { name, email, password } = req.body;
 
-    if (!name || !email || !password) {
-        return res.status(400).json({
-            success: false,
-            message: "All fields are required."
-        });
-    }
+  const exists = users.find(u => u.email === email);
 
-    return res.status(201).json({
-        success: true,
-        message: "User registered successfully.",
-        user: {
-            id: Date.now(),
-            name,
-            email
-        }
-    });
-
-});
-
-// Login
-router.post("/login", async (req, res) => {
-
-    const { email, password } = req.body;
-
-    if (!email || !password) {
-        return res.status(400).json({
-            success: false,
-            message: "Email and password are required."
-        });
-    }
-
+  if (exists) {
     return res.json({
-        success: true,
-        token: "oderinde-gold-demo-token",
-        user: {
-            id: 1,
-            name: "Demo User",
-            email
-        }
+      success: false,
+      message: "Email already exists"
     });
+  }
 
+  users.push({
+    id: Date.now(),
+    name,
+    email,
+    password
+  });
+
+  res.json({
+    success: true,
+    message: "Registration successful"
+  });
 });
 
-// Profile
-router.get("/profile", (req, res) => {
+router.post("/login", (req, res) => {
+  const { email, password } = req.body;
 
-    res.json({
-        success: true,
-        user: {
-            id: 1,
-            name: "Demo User",
-            email: "demo@oderinde.ai"
-        }
+  const user = users.find(
+    u => u.email === email && u.password === password
+  );
+
+  if (!user) {
+    return res.json({
+      success: false,
+      message: "Invalid email or password"
     });
+  }
 
+  res.json({
+    success: true,
+    message: "Login successful",
+    user: {
+      id: user.id,
+      name: user.name,
+      email: user.email
+    }
+  });
 });
 
 module.exports = router;
