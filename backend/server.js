@@ -5,6 +5,7 @@ require("dotenv").config();
 const marketRoutes = require("./routes/market");
 const aiRoutes = require("./routes/ai");
 const newsRoutes = require("./routes/news");
+const authRoutes = require("./routes/auth");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use("/api/market", marketRoutes);
 app.use("/api/ai", aiRoutes);
 app.use("/api/news", newsRoutes);
+app.use("/api/auth", authRoutes);
 
 // Home Route
 app.get("/", (req, res) => {
