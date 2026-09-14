@@ -7,9 +7,10 @@ import AIPanel from "./components/AIPanel";
 import Watchlist from "./components/Watchlist";
 import NewsPanel from "./components/NewsPanel";
 import DashboardCards from "./components/DashboardCards";
+<MarketScanner />
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
-
+import MarketScanner from "./components/MarketScanner";
 export default function App() {
 
   const [market, setMarket] = useState(null);
