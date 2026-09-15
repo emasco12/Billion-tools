@@ -63,6 +63,19 @@ async function loadAI() {
 
         set("signal", data.recommendation || "WAIT");
         set("confidence", data.confidence || "--");
+       const circle = document.getElementById("confidenceCircle");
+
+if (circle) {
+
+    const value = parseInt(data.confidence) || 0;
+
+    const circumference = 377;
+
+    const offset = circumference - (value / 100) * circumference;
+
+    circle.style.strokeDashoffset = offset;
+
+}
         set("analysis", data.comment || "Waiting...");
 
         set("trend", data.trend || "Neutral");
