@@ -62,7 +62,7 @@ async function loadAI() {
         const data = await res.json();
 
         set("signal", data.recommendation || "WAIT");
-        set("confidence", (data.confidence || 0) + "%");
+        set("confidence", data.confidence || "--");
         set("analysis", data.comment || "Waiting...");
 
         set("trend", data.trend || "Neutral");
@@ -84,15 +84,39 @@ async function loadAI() {
         set("tradeTP3", data.takeProfit3 || "--");
 
         set("tradeSignal", data.recommendation || "WAIT");
-        set("tradeConfidence", (data.confidence || 0) + "%");
+        set("tradeConfidence", data.confidence || "--");
         set("tradeBias", data.trend || "Neutral");
 
         set("summaryTrend", data.trend || "--");
         set("summarySignal", data.recommendation || "--");
-        set("summaryConfidence", (data.confidence || 0) + "%");
+        set("summaryConfidence", data.confidence || "--");
         set("summaryMomentum", data.momentum || "--");
         set("summaryRisk", data.risk || "--");
         set("summaryMove", data.expectedMove || "--");
+       // ===== NEW AI FIELDS =====
+
+set("marketBias", data.marketBias || "--");
+set("trendStrength", data.trendStrength || "--");
+set("riskLevel", data.riskLevel || "--");
+
+set("breakout", data.breakoutStatus || "--");
+set("momentum", data.momentumStatus || "--");
+
+set("scannerTrend", data.scannerTrend || "--");
+set("scannerVolatility", data.scannerVolatility || "--");
+
+set("strengthScore", data.strengthScore || "--");
+set("buyProbability", data.buyProbability || "--");
+set("sellProbability", data.sellProbability || "--");
+
+set("overallSignal", data.overallSignal || "--");
+
+set("smartMoney", data.smartMoney || "--");
+
+set("marketSession", data.marketSession || "--");
+
+set("analysis", data.comment || "--");
+set("coach", data.comment || "--");
 
     }
 
