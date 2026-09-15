@@ -327,12 +327,10 @@ async function loadDashboard() {
     loadAI(),
     loadSentiment(),
     loadAnalysis(),
-    loadZones(),
+    loadAnalytics(),
     loadNews(),
     loadCalendar()
 ]);
-
-    ]);
 
 }
 
