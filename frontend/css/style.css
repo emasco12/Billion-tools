@@ -937,3 +937,40 @@ background:#ca8a04;
 .heat-box:hover{
 transform:translateY(-5px);
 }
+
+.confidence-circle{
+position:relative;
+width:150px;
+height:150px;
+margin:20px auto;
+}
+
+.confidence-circle svg{
+transform:rotate(-90deg);
+}
+
+.circle-bg{
+fill:none;
+stroke:#333;
+stroke-width:10;
+}
+
+.circle-progress{
+fill:none;
+stroke:#FFD700;
+stroke-width:10;
+stroke-linecap:round;
+stroke-dasharray:377;
+stroke-dashoffset:377;
+transition:stroke-dashoffset .8s ease;
+}
+
+.circle-text{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+font-size:26px;
+font-weight:700;
+color:#fff;
+}
