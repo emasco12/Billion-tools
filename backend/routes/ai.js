@@ -19,13 +19,64 @@ router.get("/", async (req, res) => {
     console.log(e);
   }
 
-  let signal;
-  let trend;
-  let entry;
-  let stopLoss;
-  let takeProfit;
+  const router = require("express").Router();
+const AIAnalysisEngine = require("../services/aiAnalysisEngine");
+const SmartMoneyEngine = require("../services/smartMoneyEngine");
 
-  if (currentPrice >= 3600) {
+router.get("/", async (req, res) => {
+
+    let currentPrice = 3588.40;
+
+    try {
+        const market = await fetch("https://billion-tools.onrender.com/api/market");
+        const marketData = await market.json();
+
+        if (marketData.commodities?.length) {
+            currentPrice = Number(
+                marketData.commodities[0].close ||
+                marketData.commodities[0].price
+            );
+        }
+    } catch (e) {
+        console.log(e);
+    }
+
+    // Build market data
+    const marketPrice = {
+        price: currentPrice
+    };
+
+    // Get Smart Money analysis
+    const smartMoney = new SmartMoneyEngine(marketPrice).analyze();
+
+    // Indicators (replace with your real values later)
+    const indicators = {
+        rsi: 56,
+        macd: "Bullish",
+        ema20: currentPrice - 3,
+        ema50: currentPrice - 10,
+        ema200: currentPrice - 25,
+        atr: 18
+    };
+
+    const news = [];
+
+    // ONE SOURCE OF TRUTH
+    const engine = new AIAnalysisEngine(
+        indicators,
+        smartMoney,
+        marketPrice,
+        news
+    );
+
+    const analysis = engine.generate();
+
+    res.json(analysis);
+
+});
+
+module.exports = router;
+  
     signal = "BUY";
     trend = "Bullish";
     entry = currentPrice;
