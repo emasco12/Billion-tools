@@ -196,29 +196,72 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
     </div>
 
-</section><!-- ================= LIVE GOLD CHART ================= -->
-
 <section class="chart-card">
 
     <div class="chart-header">
+        <h2>🔥 AI Gold Market Heatmap</h2>
+        <p>Live AI strength across multiple timeframes</p>
+    </div>
 
-        <h2>Live Gold Trend</h2>
+    <div class="heatmap">
 
-        <div class="timeframes">
+        <div class="heat-row">
+            <span>1 Minute</span>
+            <div class="heat-bar">
+                <div id="heat1m" class="heat-fill buy"></div>
+            </div>
+            <strong id="heat1mValue">0%</strong>
+        </div>
 
-            <button class="active">1M</button>
-            <button>5M</button>
-            <button>15M</button>
-            <button>30M</button>
-            <button>1H</button>
-            <button>4H</button>
-            <button>1D</button>
+        <div class="heat-row">
+            <span>5 Minutes</span>
+            <div class="heat-bar">
+                <div id="heat5m" class="heat-fill buy"></div>
+            </div>
+            <strong id="heat5mValue">0%</strong>
+        </div>
 
+        <div class="heat-row">
+            <span>15 Minutes</span>
+            <div class="heat-bar">
+                <div id="heat15m" class="heat-fill"></div>
+            </div>
+            <strong id="heat15mValue">0%</strong>
+        </div>
+
+        <div class="heat-row">
+            <span>30 Minutes</span>
+            <div class="heat-bar">
+                <div id="heat30m" class="heat-fill"></div>
+            </div>
+            <strong id="heat30mValue">0%</strong>
+        </div>
+
+        <div class="heat-row">
+            <span>1 Hour</span>
+            <div class="heat-bar">
+                <div id="heat1h" class="heat-fill"></div>
+            </div>
+            <strong id="heat1hValue">0%</strong>
+        </div>
+
+        <div class="heat-row">
+            <span>4 Hours</span>
+            <div class="heat-bar">
+                <div id="heat4h" class="heat-fill"></div>
+            </div>
+            <strong id="heat4hValue">0%</strong>
+        </div>
+
+        <div class="heat-row">
+            <span>Daily</span>
+            <div class="heat-bar">
+                <div id="heat1d" class="heat-fill"></div>
+            </div>
+            <strong id="heat1dValue">0%</strong>
         </div>
 
     </div>
-
-    <div id="goldChart"></div>
 
 </section>
 
