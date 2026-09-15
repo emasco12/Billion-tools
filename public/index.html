@@ -783,7 +783,60 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
     <div class="card tools">
 
-        <h3>🧮 Gold Trading Tools</h3>
+        <div class="grid">
+
+    <div class="card tools">
+
+        <h3>🧮 Gold Trading Calculator</h3>
+
+        <div class="tool-form">
+
+            <label>Account Balance ($)</label>
+            <input type="number" id="balance" value="1000">
+
+            <label>Risk (%)</label>
+            <input type="number" id="riskPercent" value="2">
+
+            <label>Entry Price</label>
+            <input type="number" id="entryPrice" value="3600">
+
+            <label>Exit Price</label>
+            <input type="number" id="exitPrice" value="3620">
+
+            <label>Stop Loss</label>
+            <input type="number" id="stopValue" value="10">
+
+        </div>
+
+        <div class="tool-grid">
+
+            <button class="tool-btn" onclick="riskCalculator()">
+                Risk
+            </button>
+
+            <button class="tool-btn" onclick="positionCalculator()">
+                Position Size
+            </button>
+
+            <button class="tool-btn" onclick="profitCalculator()">
+                Profit
+            </button>
+
+            <button class="tool-btn" onclick="pipCalculator()">
+                Pips
+            </button>
+
+        </div>
+
+        <div id="toolResult" class="tool-result">
+
+            Ready...
+
+        </div>
+
+    </div>
+
+        </div>
 
         <div class="tool-grid">
 
