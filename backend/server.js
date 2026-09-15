@@ -12,7 +12,6 @@ const PORT = process.env.PORT || 3000;
 
 const marketRoutes = require("./routes/market");
 const aiRoutes = require("./routes/ai");
-const analysisRoutes = require("./routes/analysis");
 const newsRoutes = require("./routes/news");
 const authRoutes = require("./routes/auth");
 const calendarRoutes = require("./routes/calendar");
@@ -39,7 +38,6 @@ app.use(express.static(path.join(__dirname, "../public")));
 
 app.use("/api/market", marketRoutes);
 app.use("/api/ai", aiRoutes);
-app.use("/api/analysis", analysisRoutes);
 app.use("/api/news", newsRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/calendar", calendarRoutes);
