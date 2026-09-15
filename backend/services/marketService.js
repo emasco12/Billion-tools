@@ -4,68 +4,123 @@ const NodeCache = require("node-cache");
 const cache = new NodeCache({ stdTTL: 10 });
 
 async function getMarketData() {
-  const cached = cache.get("gold");
-  if (cached) return cached;
+    const cached = cache.get("gold");
 
-  // 1. GoldAPI
-  try {
-    const res = await axios.get("https://www.goldapi.io/api/XAU/USD", {
-      headers: {
-        "x-access-token": process.env.GOLD_API_KEY,
-      },
-    });
+    if (cached) {
+        return cached;
+    }
 
-    const data = {
-      price: res.data.price,
-      change: res.data.ch || "0%",
-    };
+    /* ===========================
+       GOLD API
+    =========================== */
 
-    cache.set("gold", data);
-    return data;
-  } catch (e) {
-    console.log("GoldAPI failed");
-  }
+    try {
 
-  // 2. Finnhub
-  try {
-    const res = await axios.get(
-      `https://finnhub.io/api/v1/quote?symbol=OANDA:XAU_USD&token=${process.env.FINNHUB_API_KEY}`
-    );
+        const res = await axios.get("https://www.goldapi.io/api/XAU/USD", {
+            headers: {
+                "x-access-token": process.env.GOLD_API_KEY
+            }
+        });
 
-    const data = {
-      price: res.data.c,
-      change: res.data.dp + "%",
-    };
+        if (res.data && res.data.price) {
 
-    cache.set("gold", data);
-    return data;
-  } catch (e) {
-    console.log("Finnhub failed");
-  }
+            const data = {
+                price: Number(res.data.price),
+                change: res.data.ch ?? res.data.change ?? "0%"
+            };
 
-  // 3. Alpha Vantage
-  try {
-    const res = await axios.get(
-      `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=XAUUSD&apikey=${process.env.ALPHA_VANTAGE_API_KEY}`
-    );
+            cache.set("gold", data);
 
-    const quote = res.data["Global Quote"];
+            console.log("✅ GoldAPI Connected");
 
-    const data = {
-      price: quote["05. price"],
-      change: quote["10. change percent"],
-    };
+            return data;
+        }
 
-    cache.set("gold", data);
-    return data;
-  } catch (e) {
-    console.log("Alpha Vantage failed");
-  }
+    } catch (e) {
 
-  return {
-    price: "--",
-    change: "0%",
-  };
+        console.error(
+            "❌ GoldAPI Failed:",
+            e.response?.data || e.message
+        );
+
+    }
+
+    /* ===========================
+       FINNHUB
+    =========================== */
+
+    try {
+
+        const res = await axios.get(
+            `https://finnhub.io/api/v1/quote?symbol=OANDA:XAU_USD&token=${process.env.FINNHUB_API_KEY}`
+        );
+
+        if (res.data && res.data.c) {
+
+            const data = {
+                price: Number(res.data.c),
+                change: `${res.data.dp || 0}%`
+            };
+
+            cache.set("gold", data);
+
+            console.log("✅ Finnhub Connected");
+
+            return data;
+        }
+
+    } catch (e) {
+
+        console.error(
+            "❌ Finnhub Failed:",
+            e.response?.data || e.message
+        );
+
+    }
+
+    /* ===========================
+       ALPHA VANTAGE
+    =========================== */
+
+    try {
+
+        const res = await axios.get(
+            `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=XAUUSD&apikey=${process.env.ALPHA_VANTAGE_API_KEY}`
+        );
+
+        const quote = res.data["Global Quote"];
+
+        if (quote) {
+
+            const data = {
+                price: Number(quote["05. price"]),
+                change: quote["10. change percent"] || "0%"
+            };
+
+            cache.set("gold", data);
+
+            console.log("✅ Alpha Vantage Connected");
+
+            return data;
+        }
+
+    } catch (e) {
+
+        console.error(
+            "❌ Alpha Vantage Failed:",
+            e.response?.data || e.message
+        );
+
+    }
+
+    /* ===========================
+       ALL FAILED
+    =========================== */
+
+    throw new Error("All market providers failed.");
+
 }
 
-module.exports = { getMarketData };
+module.exports = {
+    getMarketData
+};
