@@ -1,35 +1,91 @@
+/* =====================================================
+   ODERINDE GOLD INTELLIGENCE TOOLS
+===================================================== */
+
+function showResult(text) {
+    const result = document.getElementById("toolResult");
+    if (result) result.innerHTML = text;
+}
+
+/* ================= RISK ================= */
+
 function riskCalculator() {
 
-    const balance = parseFloat(prompt("Account Balance ($):"));
+    const balance = Number(prompt("Account Balance ($)", "1000"));
 
-    const risk = parseFloat(prompt("Risk Percentage (%):"));
+    const risk = Number(prompt("Risk %", "2"));
 
-    const entry = parseFloat(prompt("Entry Price:"));
+    if (!balance || !risk) return;
 
-    const stop = parseFloat(prompt("Stop Loss Price:"));
+    const amount = (balance * risk) / 100;
 
-    if (
-        isNaN(balance) ||
-        isNaN(risk) ||
-        isNaN(entry) ||
-        isNaN(stop)
-    ) {
-        return;
-    }
+    showResult(`
+        <h3>Risk Calculator</h3>
+        <p>Account: <b>$${balance}</b></p>
+        <p>Risk: <b>${risk}%</b></p>
+        <p>You should risk <b>$${amount.toFixed(2)}</b></p>
+    `);
 
-    const riskAmount = balance * (risk / 100);
+}
 
-    const stopDistance = Math.abs(entry - stop);
+/* ================= POSITION SIZE ================= */
 
-    const lotSize = (riskAmount / stopDistance).toFixed(2);
+function positionCalculator() {
 
-    document.getElementById("toolResult").innerHTML = `
-        <h3>Risk Calculation</h3>
+    const balance = Number(prompt("Account Balance ($)", "1000"));
 
-        <p><strong>Risk Amount:</strong> $${riskAmount.toFixed(2)}</p>
+    const stop = Number(prompt("Stop Loss (USD)", "10"));
 
-        <p><strong>Stop Distance:</strong> ${stopDistance.toFixed(2)}</p>
+    const risk = Number(prompt("Risk %", "2"));
 
-        <p><strong>Suggested Lot Size:</strong> ${lotSize}</p>
-    `;
+    if (!balance || !stop || !risk) return;
+
+    const lot = ((balance * risk / 100) / stop).toFixed(2);
+
+    showResult(`
+        <h3>Position Size</h3>
+        <p>Recommended Position:</p>
+        <h2>${lot} Lots</h2>
+    `);
+
+}
+
+/* ================= PROFIT ================= */
+
+function profitCalculator() {
+
+    const entry = Number(prompt("Entry Price", "3600"));
+
+    const exit = Number(prompt("Exit Price", "3620"));
+
+    const lots = Number(prompt("Lot Size", "1"));
+
+    if (!entry || !exit || !lots) return;
+
+    const profit = ((exit - entry) * lots * 100).toFixed(2);
+
+    showResult(`
+        <h3>Profit Calculator</h3>
+        <h2>$${profit}</h2>
+    `);
+
+}
+
+/* ================= PIPS ================= */
+
+function pipCalculator() {
+
+    const entry = Number(prompt("Entry Price", "3600"));
+
+    const exit = Number(prompt("Exit Price", "3615"));
+
+    if (!entry || !exit) return;
+
+    const pips = Math.abs(exit - entry).toFixed(2);
+
+    showResult(`
+        <h3>Pip Calculator</h3>
+        <h2>${pips} USD Move</h2>
+    `);
+
 }
