@@ -4,14 +4,23 @@ const router = express.Router();
 const { getMarketData } = require("../services/marketService");
 
 router.get("/", async (req, res) => {
-  const data = await getMarketData();
+    try {
 
-  res.json({
-    success: true,
-    price: data.price,
-    change: data.change,
-    updated: new Date().toLocaleTimeString()
-  });
+        const data = await getMarketData();
+
+        res.json({
+            success: true,
+            ...data
+        });
+
+    } catch (err) {
+
+        res.status(500).json({
+            success: false,
+            message: err.message
+        });
+
+    }
 });
 
 module.exports = router;
