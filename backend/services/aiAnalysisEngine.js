@@ -126,6 +126,46 @@ class AIAnalysisEngine {
             h1: score,
             h4: Math.min(97, score + 3),
             d1: Math.min(97, score + 5)
+                    tp1: takeProfit.toFixed(2),
+        tp2: (signal.includes("BUY") ? price + 72 : price - 72).toFixed(2),
+        tp3: (signal.includes("BUY") ? price + 108 : price - 108).toFixed(2),
+
+        goldStrength: score + "%",
+        marketPressure: score >= 60 ? "Bullish" : score <= 40 ? "Bearish" : "Neutral",
+        fearGreed: score >= 75 ? "Greed" : score <= 25 ? "Fear" : "Neutral",
+        institutionalActivity: signal.includes("BUY") ? "Accumulation" : "Distribution",
+        aiConfidence: score + "%",
+
+        buyers: score + "%",
+        sellers: (100 - score) + "%",
+        trendScore: score,
+        momentum: score >= 60 ? "Strong Bullish" : score <= 40 ? "Strong Bearish" : "Neutral",
+        volatilityIndex: score >= 60 ? "Medium" : "High",
+
+        orderFlow: signal.includes("BUY") ? "Bullish Flow" : "Bearish Flow",
+        marketStructure: trend,
+        institutions: signal.includes("BUY") ? "Buying" : "Selling",
+        liquidityStatus: "Healthy",
+
+        expectedMove: "30 - 50 Pips",
+
+        buySideLiquidity: (price + 25).toFixed(2),
+        sellSideLiquidity: (price - 25).toFixed(2),
+        nearestLiquidity: signal.includes("BUY") ? "Buy Side" : "Sell Side",
+        liquiditySweep: signal.includes("BUY") ? "Completed" : "Pending",
+
+        orderFlowStatus: signal.includes("BUY") ? "Bullish" : "Bearish",
+        liquidity: signal.includes("BUY") ? "Above Price" : "Below Price",
+        institutionalRecommendation: signal,
+
+        goldMarketSummary: {
+            trend,
+            signal,
+            confidence: score + "%",
+            momentum: score >= 60 ? "Strong" : "Weak",
+            risk: this.riskLevel(score),
+            expectedMove: "30 - 50 Pips"
+            }
         };
 
         const multiTimeframe = {
