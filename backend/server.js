@@ -18,6 +18,7 @@ const authRoutes = require("./routes/auth");
 const calendarRoutes = require("./routes/calendar");
 const sentimentRoutes = require("./routes/sentiment");
 const zonesRoutes = require("./routes/zones");
+const analyticsRoutes = require("./routes/analytics");
 
 /* ===========================
    MIDDLEWARE
@@ -44,6 +45,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/calendar", calendarRoutes);
 app.use("/api/sentiment", sentimentRoutes);
 app.use("/api/zones", zonesRoutes);
+app.use("/api/analytics", analyticsRoutes);
 
 /* ===========================
    HOME PAGE
