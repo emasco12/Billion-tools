@@ -17,6 +17,7 @@ const newsRoutes = require("./routes/news");
 const authRoutes = require("./routes/auth");
 const calendarRoutes = require("./routes/calendar");
 const sentimentRoutes = require("./routes/sentiment");
+const zonesRoutes = require("./routes/zones");
 
 /* ===========================
    MIDDLEWARE
@@ -42,6 +43,7 @@ app.use("/api/news", newsRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/calendar", calendarRoutes);
 app.use("/api/sentiment", sentimentRoutes);
+app.use("/api/zones", zonesRoutes);
 
 /* ===========================
    HOME PAGE
