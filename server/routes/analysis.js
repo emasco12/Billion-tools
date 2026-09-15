@@ -1,58 +1,90 @@
-const router = require("express").Router();
+const signal = randomSignal();
 
-router.get("/", async (req, res) => {
+res.json({
 
-    const signals = ["BUY", "SELL", "WAIT"];
+    // Multi-Timeframe
+    tf1m: signal,
+    tf5m: signal,
+    tf15m: signal,
+    tf30m: signal,
+    tf1h: signal,
+    tf4h: signal,
+    tf1d: signal,
 
-    const randomSignal = () =>
-        signals[Math.floor(Math.random() * signals.length)];
+    // Technical Indicators
+    rsi:
+        signal === "BUY"
+            ? "68.25"
+            : signal === "SELL"
+            ? "33.80"
+            : "50.15",
 
-    res.json({
+    macd: signal === "BUY" ? "Bullish" : signal === "SELL" ? "Bearish" : "Neutral",
 
-        // Multi-Timeframe
-        tf1m: randomSignal(),
-        tf5m: randomSignal(),
-        tf15m: randomSignal(),
-        tf30m: randomSignal(),
-        tf1h: randomSignal(),
-        tf4h: randomSignal(),
-        tf1d: randomSignal(),
+    ema20: signal === "BUY" ? "Bullish" : "Bearish",
+    ema50: signal === "BUY" ? "Bullish" : "Bearish",
+    ema200: signal === "BUY" ? "Bullish" : "Bearish",
 
-        // Technical Indicators
-        rsi: (Math.random() * 40 + 40).toFixed(2),
-        macd: Math.random() > 0.5 ? "Bullish" : "Bearish",
-        ema20: Math.random() > 0.5 ? "Bullish" : "Bearish",
-        ema50: Math.random() > 0.5 ? "Bullish" : "Bearish",
-        ema200: Math.random() > 0.5 ? "Bullish" : "Bearish",
-        atr: (Math.random() * 20 + 15).toFixed(2),
+    atr: (Math.random() * 8 + 18).toFixed(2),
 
-        // Liquidity
-        buyLiquidity: "Detected",
-        sellLiquidity: "Detected",
-        nearestLiquidity: (3580 + Math.random() * 40).toFixed(2),
-        liquiditySweep: Math.random() > 0.5 ? "Completed" : "Waiting",
+    // Liquidity
+    buyLiquidity: "Detected",
+    sellLiquidity: "Detected",
+    nearestLiquidity: (3580 + Math.random() * 40).toFixed(2),
+    liquiditySweep: signal === "WAIT" ? "Waiting" : "Completed",
 
-        // Institutional Analysis
-        orderFlow: Math.random() > 0.5 ? "Bullish" : "Bearish",
-        liquidityStatus: "Healthy",
-        structure: Math.random() > 0.5 ? "Bullish Structure" : "Bearish Structure",
-        institutions: "Active",
-        recommendation: randomSignal(),
+    // Institutional
+    orderFlow: signal === "BUY" ? "Bullish" : "Bearish",
+    liquidityStatus: "Healthy",
+    structure:
+        signal === "BUY"
+            ? "Bullish Structure"
+            : signal === "SELL"
+            ? "Bearish Structure"
+            : "Range",
 
-        // Smart Money Concepts
-        bos: Math.random() > 0.5 ? "Bullish BOS" : "Bearish BOS",
-        choch: Math.random() > 0.5 ? "Bullish CHoCH" : "Bearish CHoCH",
-        orderBlock: "Detected",
-        fvg: "Detected",
+    institutions:
+        signal === "BUY"
+            ? "Accumulating"
+            : signal === "SELL"
+            ? "Distributing"
+            : "Neutral",
 
-        // AI
-        coach: "Trade only after confirmation. Avoid chasing candles and maintain proper risk management.",
+    recommendation: signal,
 
-        marketReason:
-            "Current market structure suggests institutions are active around major liquidity zones. Wait for confirmation before entering."
+    // Smart Money
+    bos:
+        signal === "BUY"
+            ? "Bullish BOS"
+            : "Bearish BOS",
 
-    });
+    choch:
+        signal === "BUY"
+            ? "Bullish CHoCH"
+            : "Bearish CHoCH",
+
+    orderBlock:
+        signal === "BUY"
+            ? "Bullish Order Block"
+            : "Bearish Order Block",
+
+    fvg:
+        signal === "BUY"
+            ? "Bullish FVG"
+            : "Bearish FVG",
+
+    coach:
+        signal === "BUY"
+            ? "Buy only after a pullback into demand."
+            : signal === "SELL"
+            ? "Wait for a retracement before selling."
+            : "Stay out until a clear confirmation appears.",
+
+    marketReason:
+        signal === "BUY"
+            ? "Institutions are accumulating positions above key support."
+            : signal === "SELL"
+            ? "Institutional selling pressure is dominating the market."
+            : "Price is consolidating inside a liquidity range."
 
 });
-
-module.exports = router;
