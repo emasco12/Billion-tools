@@ -519,7 +519,32 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
     <div class="card trade-card">
 
-        <h3>🎯 AI Trade Setup</h3>
+        <div class="confidence-circle">
+
+    <svg width="150" height="150">
+
+        <circle
+            cx="75"
+            cy="75"
+            r="60"
+            class="circle-bg">
+        </circle>
+
+        <circle
+            cx="75"
+            cy="75"
+            r="60"
+            class="circle-progress"
+            id="confidenceCircle">
+        </circle>
+
+    </svg>
+
+    <div class="circle-text">
+        <span id="confidence">--%</span>
+    </div>
+
+        </div>
 
         <div class="trade-row">
             <span>Entry Price</span>
@@ -555,7 +580,63 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
     <div class="card">
 
-        <h3>🧠 Smart Money Concepts</h3>
+        <h3>🏦 Institutional Smart Money</h3>
+
+<div class="heatmap-grid">
+
+    <div class="heat-box buy">
+        <h4>Liquidity</h4>
+        <span id="liquidity">--</span>
+    </div>
+
+    <div class="heat-box buy">
+        <h4>BOS</h4>
+        <span id="bos">--</span>
+    </div>
+
+    <div class="heat-box wait">
+        <h4>CHoCH</h4>
+        <span id="choch">--</span>
+    </div>
+
+    <div class="heat-box buy">
+        <h4>Order Block</h4>
+        <span id="ob">--</span>
+    </div>
+
+    <div class="heat-box sell">
+        <h4>FVG</h4>
+        <span id="fvg">--</span>
+    </div>
+
+</div>
+
+<br>
+
+<div class="analysis-row">
+    <span>Order Flow</span>
+    <strong id="orderFlow">--</strong>
+</div>
+
+<div class="analysis-row">
+    <span>Market Structure</span>
+    <strong id="structure">--</strong>
+</div>
+
+<div class="analysis-row">
+    <span>Institutions</span>
+    <strong id="institutions">--</strong>
+</div>
+
+<div class="analysis-row">
+    <span>Liquidity Status</span>
+    <strong id="liquidityStatus">--</strong>
+</div>
+
+<div class="analysis-row">
+    <span>AI Recommendation</span>
+    <strong id="recommendation">--</strong>
+</div>
 
         <div class="trade-row">
             <span>Liquidity Sweep</span>
