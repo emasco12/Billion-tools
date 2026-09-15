@@ -8,10 +8,10 @@ router.get("/", (req, res) => {
 
     if (score >= 75) {
         sentiment = "Bullish";
-    } else if (score >= 55) {
-        sentiment = "Neutral";
-    } else {
+    } else if (score <= 45) {
         sentiment = "Bearish";
+    } else {
+        sentiment = "Neutral";
     }
 
     res.json({
