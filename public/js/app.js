@@ -1,20 +1,55 @@
 const API = "/api";
 
+/* =====================================================
+   ODERINDE GOLD INTELLIGENCE
+   AI GOLD TRADING DASHBOARD
+===================================================== */
+
+const $ = (id) => document.getElementById(id);
+
+function set(id, value) {
+    const el = $(id);
+    if (el) el.textContent = value;
+}
+
+function setHTML(id, value) {
+    const el = $(id);
+    if (el) el.innerHTML = value;
+}
+
 /* ===================== MARKET ===================== */
 
 async function loadPrice() {
+
     try {
+
         const res = await fetch(`${API}/market`);
         const data = await res.json();
 
-        document.getElementById("goldPrice").textContent = data.price;
-        document.getElementById("goldChange").textContent = data.change;
-        document.getElementById("goldUpdated").textContent =
-            "Updated " + data.updated;
+        set("goldPrice", data.price || "--");
+        set("goldChange", data.change || "--");
+        set("goldUpdated", "Updated " + (data.updated || "--"));
 
-    } catch (err) {
-        console.error(err);
+        set("entry", data.entry || "--");
+        set("tradeEntry", data.entry || "--");
+
+        set("dailyHigh", data.dailyHigh || "--");
+        set("dailyLow", data.dailyLow || "--");
+
+        set("weeklyHigh", data.weeklyHigh || "--");
+        set("weeklyLow", data.weeklyLow || "--");
+
+        set("monthlyHigh", data.monthlyHigh || "--");
+        set("monthlyLow", data.monthlyLow || "--");
+
     }
+
+    catch (err) {
+
+        console.error("Market Error:", err);
+
+    }
+
 }
 
 /* ===================== AI ===================== */
@@ -26,36 +61,48 @@ async function loadAI() {
         const res = await fetch(`${API}/ai`);
         const data = await res.json();
 
-        document.getElementById("signal").textContent =
-            data.recommendation;
+        set("signal", data.recommendation || "WAIT");
+        set("confidence", (data.confidence || 0) + "%");
+        set("analysis", data.comment || "Waiting...");
 
-        document.getElementById("confidence").textContent =
-            data.confidence + "%";
+        set("trend", data.trend || "Neutral");
+        set("trendCard", data.trend || "Neutral");
 
-        document.getElementById("analysis").textContent =
-            data.comment;
+        set("sentimentCard", data.sentiment || "Neutral");
 
-        document.getElementById("trend").textContent =
-            data.trend;
+        set("volatility", data.volatility || "Normal");
 
-        document.getElementById("volatility").textContent =
-            data.volatility || "Normal";
+        set("stopLoss", data.stopLoss || "--");
+        set("tradeSL", data.stopLoss || "--");
 
-        document.getElementById("support").textContent =
-            data.stopLoss;
+        set("tp1", data.takeProfit1 || data.takeProfit || "--");
+        set("tp2", data.takeProfit2 || "--");
+        set("tp3", data.takeProfit3 || "--");
 
-        document.getElementById("resistance").textContent =
-            data.takeProfit;
+        set("tradeTP1", data.takeProfit1 || data.takeProfit || "--");
+        set("tradeTP2", data.takeProfit2 || "--");
+        set("tradeTP3", data.takeProfit3 || "--");
 
-        document.getElementById("entry").textContent =
-            data.entry;
+        set("tradeSignal", data.recommendation || "WAIT");
+        set("tradeConfidence", (data.confidence || 0) + "%");
+        set("tradeBias", data.trend || "Neutral");
 
-    } catch (err) {
-        console.error(err);
+        set("summaryTrend", data.trend || "--");
+        set("summarySignal", data.recommendation || "--");
+        set("summaryConfidence", (data.confidence || 0) + "%");
+        set("summaryMomentum", data.momentum || "--");
+        set("summaryRisk", data.risk || "--");
+        set("summaryMove", data.expectedMove || "--");
+
     }
-}
 
-/* ===================== SENTIMENT ===================== */
+    catch (err) {
+
+        console.error("AI Error:", err);
+
+    }
+
+}/* ===================== SENTIMENT ===================== */
 
 async function loadSentiment() {
 
@@ -64,15 +111,77 @@ async function loadSentiment() {
         const res = await fetch(`${API}/sentiment`);
         const data = await res.json();
 
-        document.getElementById("sentiment").textContent =
-            `${data.sentiment} (${data.score}%)`;
+        set("sentiment", `${data.sentiment} (${data.score}%)`);
+        set("sentimentCard", data.sentiment || "Neutral");
 
     } catch (err) {
-        console.error(err);
+
+        console.error("Sentiment Error:", err);
+
     }
+
 }
 
-/* ===================== NEWS ===================== */
+/* ===================== TECHNICAL ANALYSIS ===================== */
+
+async function loadAnalysis() {
+
+    try {
+
+        const res = await fetch(`${API}/analysis`);
+        const data = await res.json();
+
+        set("tf1m", data.tf1m || "--");
+        set("tf5m", data.tf5m || "--");
+        set("tf15m", data.tf15m || "--");
+        set("tf30m", data.tf30m || "--");
+        set("tf1h", data.tf1h || "--");
+        set("tf4h", data.tf4h || "--");
+        set("tf1d", data.tf1d || "--");
+
+        set("rsi", data.rsi || "--");
+        set("macd", data.macd || "--");
+        set("ema20", data.ema20 || "--");
+        set("ema50", data.ema50 || "--");
+        set("ema200", data.ema200 || "--");
+        set("atr", data.atr || "--");
+
+        set("buyLiquidity", data.buyLiquidity || "--");
+        set("sellLiquidity", data.sellLiquidity || "--");
+        set("nearestLiquidity", data.nearestLiquidity || "--");
+        set("liquiditySweep", data.liquiditySweep || "--");
+
+        set("orderFlow", data.orderFlow || "--");
+        set("liquidityStatus", data.liquidityStatus || "--");
+        set("structure", data.structure || "--");
+        set("institutions", data.institutions || "--");
+        set("recommendation", data.recommendation || "--");
+
+        set("liquidity", data.liquiditySweep || "--");
+        set("bos", data.bos || "--");
+        set("choch", data.choch || "--");
+        set("ob", data.orderBlock || "--");
+        set("fvg", data.fvg || "--");
+
+        setHTML(
+            "coach",
+            data.coach ||
+            "AI is analysing today's market conditions..."
+        );
+
+        setHTML(
+            "marketReason",
+            data.marketReason ||
+            "Waiting for AI reasoning..."
+        );
+
+    } catch (err) {
+
+        console.error("Analysis Error:", err);
+
+    }
+
+}/* ===================== NEWS ===================== */
 
 async function loadNews() {
 
@@ -81,7 +190,9 @@ async function loadNews() {
         const res = await fetch(`${API}/news`);
         const news = await res.json();
 
-        const container = document.getElementById("newsList");
+        const container = $("newsList");
+
+        if (!container) return;
 
         container.innerHTML = "";
 
@@ -97,11 +208,14 @@ async function loadNews() {
         });
 
     } catch (err) {
-        console.error(err);
+
+        console.error("News Error:", err);
+
     }
+
 }
 
-/* ===================== CALENDAR ===================== */
+/* ===================== ECONOMIC CALENDAR ===================== */
 
 async function loadCalendar() {
 
@@ -110,7 +224,9 @@ async function loadCalendar() {
         const res = await fetch(`${API}/calendar`);
         const events = await res.json();
 
-        const container = document.getElementById("calendarList");
+        const container = $("calendarList");
+
+        if (!container) return;
 
         container.innerHTML = "";
 
@@ -127,77 +243,213 @@ async function loadCalendar() {
         });
 
     } catch (err) {
-        console.error(err);
-    }
-}
 
-/* ===================== AI ASSISTANT ===================== */
-
-async function askAI() {
-
-    const question =
-        document.getElementById("aiQuestion").value.trim();
-
-    if (!question) return;
-
-    const response =
-        document.getElementById("aiResponse");
-
-    response.innerHTML = "Thinking...";
-
-    try {
-
-        const res = await fetch(`${API}/assistant`, {
-
-            method: "POST",
-
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify({
-                question
-            })
-
-        });
-
-        const data = await res.json();
-
-        response.innerHTML =
-            data.answer || "No response.";
-
-    } catch (err) {
-
-        response.innerHTML =
-            "Unable to contact AI.";
+        console.error("Calendar Error:", err);
 
     }
+
 }
 
-document
-.getElementById("askAI")
-.addEventListener("click", askAI);
-
-/* ===================== LOAD ===================== */
+/* ===================== DASHBOARD ===================== */
 
 async function loadDashboard() {
 
     await Promise.all([
 
         loadPrice(),
-
         loadAI(),
-
         loadSentiment(),
-
+        loadAnalysis(),
         loadNews(),
-
         loadCalendar()
 
     ]);
 
 }
 
-loadDashboard();
+/* ===================== LIVE CLOCK ===================== */
 
-setInterval(loadDashboard, 30000);
+function updateClock() {
+
+    const now = new Date();
+
+    set("lastUpdate", now.toLocaleTimeString());
+
+    const hour = now.getUTCHours();
+
+    let session = "Sydney";
+    let status = "Closed";
+
+    if (hour >= 0 && hour < 7) {
+
+        session = "Tokyo";
+        status = "Open";
+
+    } else if (hour >= 7 && hour < 13) {
+
+        session = "London";
+        status = "Open";
+
+    } else if (hour >= 13 && hour < 22) {
+
+        session = "New York";
+        status = "Open";
+
+    }
+
+    set("marketSession", session);
+    set("marketStatus", status);
+
+}
+
+/* ===================== START APP ===================== */
+
+window.addEventListener("DOMContentLoaded", () => {
+
+    loadDashboard();
+
+    updateClock();
+
+    setInterval(loadDashboard, 30000);
+
+    setInterval(updateClock, 1000);
+
+});/* =====================================================
+   UI HELPERS
+===================================================== */
+
+function updateSignalColors() {
+
+    const ids = [
+        "signal",
+        "tradeSignal",
+        "summarySignal"
+    ];
+
+    ids.forEach(id => {
+
+        const el = document.getElementById(id);
+
+        if (!el) return;
+
+        const value = el.textContent.toUpperCase();
+
+        el.classList.remove("buy", "sell", "wait");
+
+        if (value.includes("BUY")) {
+
+            el.classList.add("buy");
+
+        } else if (value.includes("SELL")) {
+
+            el.classList.add("sell");
+
+        } else {
+
+            el.classList.add("wait");
+
+        }
+
+    });
+
+}
+
+/* =====================================================
+   API STATUS
+===================================================== */
+
+function apiConnected() {
+
+    const api = document.getElementById("apiStatus");
+
+    if (api) {
+
+        api.textContent = "Connected";
+        api.style.color = "#00d26a";
+
+    }
+
+}
+
+function apiDisconnected() {
+
+    const api = document.getElementById("apiStatus");
+
+    if (api) {
+
+        api.textContent = "Disconnected";
+        api.style.color = "#ff4d4d";
+
+    }
+
+}
+
+/* =====================================================
+   LOADER
+===================================================== */
+
+function showLoader() {
+
+    const loader = document.getElementById("loader");
+
+    if (loader) {
+
+        loader.style.display = "flex";
+
+    }
+
+}
+
+function hideLoader() {
+
+    const loader = document.getElementById("loader");
+
+    if (loader) {
+
+        loader.style.display = "none";
+
+    }
+
+}
+
+/* =====================================================
+   REFRESH
+===================================================== */
+
+async function refreshDashboard() {
+
+    try {
+
+        showLoader();
+
+        await loadDashboard();
+
+        apiConnected();
+
+        updateSignalColors();
+
+    } catch (err) {
+
+        console.error(err);
+
+        apiDisconnected();
+
+    } finally {
+
+        hideLoader();
+
+    }
+
+}
+
+/* =====================================================
+   AUTO START
+===================================================== */
+
+window.addEventListener("load", () => {
+
+    refreshDashboard();
+
+    setInterval(refreshDashboard, 30000);
+
+});
