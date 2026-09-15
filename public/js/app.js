@@ -162,6 +162,37 @@ async function loadSentiment() {
 /* ===================== TECHNICAL ANALYSIS ===================== */
 
 async function loadAnalysis() {
+   /* ===================== GOLD ZONES ===================== */
+
+async function loadZones() {
+
+    try {
+
+        const res = await fetch(`${API}/zones`);
+        const data = await res.json();
+
+        set("zoneEntry", data.zoneEntry);
+        set("buyZone", data.buyZone);
+        set("sellZone", data.sellZone);
+
+        set("supportZone", data.supportZone);
+        set("resistanceZone", data.resistanceZone);
+
+        set("institutionOB", data.institutionOB);
+
+        set("demandZone", data.demandZone);
+        set("supplyZone", data.supplyZone);
+
+        set("liquidityZone", data.liquidityZone);
+        set("breakoutZone", data.breakoutZone);
+
+    } catch (err) {
+
+        console.error("Zones Error:", err);
+
+    }
+
+}
 
     try {
 
@@ -292,13 +323,14 @@ async function loadCalendar() {
 async function loadDashboard() {
 
     await Promise.all([
-
-        loadPrice(),
-        loadAI(),
-        loadSentiment(),
-        loadAnalysis(),
-        loadNews(),
-        loadCalendar()
+    loadPrice(),
+    loadAI(),
+    loadSentiment(),
+    loadAnalysis(),
+    loadZones(),
+    loadNews(),
+    loadCalendar()
+]);
 
     ]);
 
