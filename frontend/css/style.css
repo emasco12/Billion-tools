@@ -895,3 +895,45 @@ body{
     }
 
 }
+
+.heatmap-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(110px,1fr));
+gap:15px;
+margin-top:20px;
+}
+
+.heat-box{
+padding:20px;
+border-radius:12px;
+text-align:center;
+font-weight:600;
+color:#fff;
+transition:.3s;
+}
+
+.heat-box h4{
+margin-bottom:10px;
+font-size:16px;
+}
+
+.heat-box span{
+font-size:20px;
+font-weight:700;
+}
+
+.buy{
+background:#16a34a;
+}
+
+.sell{
+background:#dc2626;
+}
+
+.wait{
+background:#ca8a04;
+}
+
+.heat-box:hover{
+transform:translateY(-5px);
+}
